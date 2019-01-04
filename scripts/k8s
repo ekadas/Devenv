@@ -1,0 +1,21 @@
+#!/bin/bash
+
+k8s() {
+   if [ -z "$1"  ] ; then
+      CURRENT=$(readlink ~/.kube/config | xargs basename)
+      echo "[${CURRENT}]"
+      ls -1 ~/.kube/*.yaml | xargs -n 1 basename
+   else
+      ln -sf ~/.kube/${1} ~/.kube/config
+      echo "Activated $1"
+   fi
+}
+
+_k8sls() {
+   local cur=${COMP_WORDS[COMP_CWORD]}
+   COMPREPLY=( $(compgen -W "`ls -1 ~/.kube/*.yaml | xargs -n 1 basename`" -- $cur)  )
+}
+
+complete -F _k8sls k8s
+
+k8s $1

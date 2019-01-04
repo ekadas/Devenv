@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+
+FROM=$1
+TO=$2
+
+cp -R $FROM $TO
+cd $TO
+rename "s/${FROM}/${TO}/" *
+
+sed -i '' -- "s/${FROM}/${TO}/g" *

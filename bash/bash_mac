@@ -1,0 +1,9 @@
+alias ls='ls -G'
+
+source ~/Devenv/bash/bash_common
+
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+   . $(brew --prefix)/etc/bash_completion
+fi
+
+alias tw="open -a /Applications/TextWrangler.app"

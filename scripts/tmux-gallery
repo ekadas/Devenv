@@ -1,0 +1,23 @@
+#!/bin/sh
+
+docker start postgres
+
+BASE="$HOME/Code/deploy"
+cd $BASE
+
+tmux new-session -d -s gallery -n ui
+tmux new-window -t gallery:2 -n backend
+tmux new-window -t gallery:3 -n ui-nvim
+tmux new-window -t gallery:4 -n ui-bash
+tmux new-window -t gallery:5 -n backend-nvim
+tmux new-window -t gallery:6 -n backend-bash
+
+tmux send-keys -t gallery:1 "cd $BASE/deploy-gallery-frontend; npm start" C-m
+tmux send-keys -t gallery:2 "cd $BASE/deploy-gallery-backend; FLASK_ENV=development flask run" C-m
+tmux send-keys -t gallery:3 "cd $BASE/deploy-gallery-frontend; cd src/; nvim" C-m
+tmux send-keys -t gallery:4 "cd $BASE/deploy-gallery-frontend" C-m
+tmux send-keys -t gallery:5 "cd $BASE/deploy-gallery-backend; nvim" C-m
+tmux send-keys -t gallery:6 "cd $BASE/deploy-gallery-backend" C-m
+
+tmux select-window -t gallery:3
+tmux attach-session -t gallery
