@@ -13,3 +13,9 @@ fi
 
 # symlinks tmux configuration
 ln -sf $BASEDIR/tmux/tmux.conf ~/.tmux.conf
+
+# configure git
+ln -sf $BASEDIR/git/gitconfig ~/.gitconfig
+if [ "$OS" = "Darwin" ]; then
+   ln -sf $BASEDIR/git/gitexcludes ~/.gitexcludes
+fi
