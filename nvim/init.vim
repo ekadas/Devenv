@@ -48,20 +48,8 @@ Plug 'wavded/vim-stylus', { 'for': 'stylus' }
 
 call plug#end()
 
-" get os version
-function! GetRunningOS()
-  if has("win32")
-    return "win"
-  endif
-  if has("unix")
-    if system('uname')=~'Darwin'
-      return "mac"
-    else
-      return "linux"
-    endif
-  endif
-endfunction
-let os=GetRunningOS()
+let g:python_host_prog = expand('$HOME') . '/.pyenv/versions/nvim2/bin/python'
+let g:python3_host_prog = expand('$HOME') . '/.pyenv/versions/nvim3/bin/python'
 
 " line numbers
 set number
@@ -127,13 +115,6 @@ set laststatus=2
 
 " python
 let g:neomake_python_enabled_makers = ['flake8']
-if os=="mac"
-   let g:python_host_prog = '/Users/Endre/.pyenv/versions/neovim2/bin/python'
-   let g:python3_host_prog = '/Users/Endre/.pyenv/versions/neovim3/bin/python'
-else
-   let g:python_host_prog = '/home/endre/.virtualenv/neovim2/bin/python'
-   let g:python3_host_prog = '/home/endre/.virtualenv/neovim/bin/python'
-endif
 autocmd Filetype py 
    \ setlocal tabstop=4
    \ setlocal softtabstop=4
