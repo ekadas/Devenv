@@ -19,3 +19,8 @@ ln -sf $BASEDIR/git/gitconfig ~/.gitconfig
 if [ "$OS" = "Darwin" ]; then
    ln -sf $BASEDIR/git/gitexcludes ~/.gitexcludes
 fi
+
+# configure nvim
+# install vim-plug
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+ln -sf $BASEDIR/nvim ~/.config/nvim
