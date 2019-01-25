@@ -1,5 +1,8 @@
 #!/bin/bash
 
+PYTHON2=2.7.15
+PYTHON3=3.7.1
+
 BASEDIR="$( cd "$(dirname "$0")" ; pwd -P )"
 OS=$(uname -s)
 
@@ -15,47 +18,35 @@ pconfiguring () {
    pprint "\n→ Configuring $1"
 }
 
+confirm () {
+   read -r -p "Configure $1? [y/N] " response
+   if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
+      pconfiguring $1
+      source $2
+   fi
+}
+
 # configure python
-pconfiguring "pyenv"
-if [ "$OS" = "Darwin" ]; then
-   brew install pyenv-virtualenv > /dev/null
-   export CFLAGS="-I$(xcrun --show-sdk-path)/usr/include"
-else
-   curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer > /dev/null | bash > /dev/null
-fi
-pyenv install -s 3.7.1 > /dev/null
-pyenv install -s 2.7.15 > /dev/null
+confirm "python" install/python.sh
 
 # configures bash
-pconfiguring "bash"
-if [ "$OS" = "Darwin" ]; then
-   ln -sf $BASEDIR/bash/bash_mac ~/.bash_profile
-else
-   ln -sf $BASEDIR/bash/bash_linux ~/.bashrc
-   ln -sf $BASEDIR/bash/bash_linux ~/.bash_profile
-fi
+confirm "bash" install/bash.sh
+source ~/.bash_profile
 
 # symlinks tmux configuration
-pconfiguring "tmux"
-ln -sf $BASEDIR/tmux/tmux.conf ~/.tmux.conf
+confirm "tmux" install/tmux.sh
 
 # configure git
-pconfiguring "git"
-ln -sf $BASEDIR/git/gitconfig ~/.gitconfig
-if [ "$OS" = "Darwin" ]; then
-   ln -sf $BASEDIR/git/gitexcludes ~/.gitexcludes
-fi
+confirm "git" install/git.sh
 
 # configure nvim
 ## install vim-plug
-pconfiguring "neovim"
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim > /dev/null
-## install python-neovim
-pyenv virtualenv 2.7.15 nvim2 > /dev/null
-export PYENV_VERSION=nvim2
-pip install neovim > /dev/null
-pyenv virtualenv 3.7.1 nvim3 > /dev/null
-export PYENV_VERSION=nvim3
-pip install neovim > /dev/null
-ln -sf $BASEDIR/nvim ~/.config/nvim
+confirm "neovim" install/neovim.sh
+
+# configure gcloud
+if [ "$OS" = "Darwin" ]; then
+   # NOTE: this may require setting pyenv first
+   confirm "gcloud" install/gcloud.sh
+fi
+
 unset PYENV_VERSION
