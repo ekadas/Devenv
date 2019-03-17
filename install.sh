@@ -31,6 +31,10 @@ if [ "$OS" = "Darwin" ]; then
    confirm "brew" brew/install.sh
 fi
 
+if [ "$OS" = "Darwin" ]; then
+   confirm "iterm2" iterm2/install.sh
+fi
+
 # configure python
 confirm "python" python/install.sh
 
