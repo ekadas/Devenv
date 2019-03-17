@@ -26,27 +26,32 @@ confirm () {
    fi
 }
 
+# install brew
+if [ "$OS" = "Darwin" ]; then
+   confirm "brew" brew/install.sh
+fi
+
 # configure python
-confirm "python" install/python.sh
+confirm "python" python/install.sh
 
 # configures bash
-confirm "bash" install/bash.sh
+confirm "bash" bash/install.sh
 source ~/.bash_profile
 
 # symlinks tmux configuration
-confirm "tmux" install/tmux.sh
+confirm "tmux" tmux/install.sh
 
 # configure git
-confirm "git" install/git.sh
+confirm "git" git/install.sh
 
 # configure nvim
 ## install vim-plug
-confirm "neovim" install/neovim.sh
+confirm "neovim" nvim/install.sh
 
 # configure gcloud
 if [ "$OS" = "Darwin" ]; then
    # NOTE: this may require setting pyenv first
-   confirm "gcloud" install/gcloud.sh
+   confirm "gcloud" gcloud/install.sh
 fi
 
 unset PYENV_VERSION
