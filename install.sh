@@ -52,6 +52,11 @@ confirm "git" git/install.sh
 ## install vim-plug
 confirm "neovim" nvim/install.sh
 
+# configure docker
+if [ "$OS" = "Darwin" ]; then
+   confirm "docker" docker/install.sh
+fi
+
 # configure gcloud
 if [ "$OS" = "Darwin" ]; then
    # NOTE: this may require setting pyenv first
