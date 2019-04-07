@@ -66,6 +66,9 @@ set pastetoggle=<F2>
 " allows switching buffers without save
 set hidden
 
+" allows copy in visual mode
+:vnoremap <C-c> "+y
+
 " buffer shortcuts
 :noremap <C-l> :bnext<CR>
 :noremap <C-h> :bprevious<CR>
