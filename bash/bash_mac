@@ -15,3 +15,5 @@ if [ -f "$CLOUDSDK_INSTALL_DIR/path.bash.inc" ]; then . "$CLOUDSDK_INSTALL_DIR/p
 
 # The next line enables shell command completion for gcloud.
 if [ -f "$CLOUDSDK_INSTALL_DIR/completion.bash.inc" ]; then . "$CLOUDSDK_INSTALL_DIR/completion.bash.inc"; fi
+
+source <(kubectl completion bash)

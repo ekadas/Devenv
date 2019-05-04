@@ -66,4 +66,9 @@ if [ "$OS" = "Darwin" ]; then
    confirm "gcloud" gcloud/install.sh
 fi
 
+# configure kubectl
+if [ "$OS" = "Darwin" ]; then
+   confirm "kubectl" kubectl/install.sh
+fi
+
 unset PYENV_VERSION
