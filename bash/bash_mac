@@ -8,8 +8,10 @@ fi
 
 alias tw="open -a /Applications/TextWrangler.app"
 
+CLOUDSDK_INSTALL_DIR=/usr/local/share/google-cloud-sdk
+
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/Endre/google-cloud-sdk/path.bash.inc' ]; then . '/Users/Endre/google-cloud-sdk/path.bash.inc'; fi
+if [ -f "$CLOUDSDK_INSTALL_DIR/path.bash.inc" ]; then . "$CLOUDSDK_INSTALL_DIR/path.bash.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/Endre/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/Endre/google-cloud-sdk/completion.bash.inc'; fi
+if [ -f "$CLOUDSDK_INSTALL_DIR/completion.bash.inc" ]; then . "$CLOUDSDK_INSTALL_DIR/completion.bash.inc"; fi
