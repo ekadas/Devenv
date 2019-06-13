@@ -139,6 +139,10 @@ autocmd Filetype json setlocal ts=2 sw=2 sts=2
 " yaml
 autocmd Filetype yaml setlocal ts=2 sw=2 sts=2
 
+" jinja
+au BufNewFile,BufRead *.jinja setlocal ft=yaml
+autocmd Filetype jinja setlocal ts=2 sw=2 sts=2
+
 " stylus
 autocmd Filetype stylus setlocal ts=2 sw=2 sts=2
 
