@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+
+WATCH_COMMAND=""
+
+for i in {0..20}; do
+   WATCH_COMMAND="${WATCH_COMMAND} kubectl exec concourse-worker-${i} df | grep concourse-work-dir | sed 's/^/conourse-worker-${i} ---> /';"
+done
+
+WATCH_COMMAND="${WATCH_COMMAND} kubectl get hpa"
+echo $WATCH_COMMAND
+watch -n 1 $WATCH_COMMAND
