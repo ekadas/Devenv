@@ -3,7 +3,9 @@ set -e
 
 WATCH_COMMAND=""
 
-for i in {0..20}; do
+MAX_WORKERS=$(kubectl get hpa concourse-worker-hpa -o json | jq '.spec.maxReplicas')
+
+for i in $( seq 0 $MAX_WORKERS ); do
    WATCH_COMMAND="${WATCH_COMMAND} kubectl exec concourse-worker-${i} df | grep concourse-work-dir | sed 's/^/conourse-worker-${i} ---> /';"
 done
 
