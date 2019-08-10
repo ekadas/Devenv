@@ -55,6 +55,9 @@ confirm "neovim" nvim/install.sh
 # configure nvm
 confirm "nvm" nvm/install.sh
 
+# configure rbenv
+confirm "rbenv" rbenv/install.sh
+
 # configure docker
 if [ "$OS" = "Darwin" ]; then
    confirm "docker" docker/install.sh
