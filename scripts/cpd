@@ -5,6 +5,7 @@ FROM=$1
 TO=$2
 
 cp -R $FROM $TO
+rm -rf $TO/__snapshots__
 cd $TO
 rename "s/${FROM}/${TO}/" *
 
