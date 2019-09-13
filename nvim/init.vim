@@ -46,6 +46,9 @@ Plug 'vim-scripts/HTML-AutoCloseTag', { 'for': 'html' }
 " stylus
 Plug 'wavded/vim-stylus', { 'for': 'stylus' }
 
+" rust
+Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust', 'do': 'cargo +nightly install racer; rustup component add rust-src' }
+
 call plug#end()
 
 let g:python_host_prog = expand('$HOME') . '/.pyenv/versions/nvim2/bin/python'
@@ -158,6 +161,13 @@ au BufNewFile,BufReadPost Jenkinsfile set filetype=groovy
 
 " tf
 autocmd Filetype tf setlocal ts=2 sw=2 sts=2
+
+" rust
+let g:neomake_rust_enabled_makers = ['cargo']
+let g:neomake_rust_cargo_command = ['check']
+let g:rustfmt_autosave = 1
+let g:deoplete#sources#rust#racer_binary = expand('$HOME') . '/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path = system('echo -n "$(rustc --print sysroot)"') . '/lib/rustlib/src/rust/src'
 
 " Nerdtree
 map <C-n> :NERDTreeToggle<CR>

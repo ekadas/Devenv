@@ -58,6 +58,9 @@ confirm "nvm" nvm/install.sh
 # configure rbenv
 confirm "rbenv" rbenv/install.sh
 
+# configure rbenv
+confirm "rust" rust/install.sh
+
 # configure docker
 if [ "$OS" = "Darwin" ]; then
    confirm "docker" docker/install.sh
