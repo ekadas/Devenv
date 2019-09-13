@@ -149,6 +149,9 @@ autocmd Filetype stylus setlocal ts=2 sw=2 sts=2
 " stylus
 autocmd Filetype scss setlocal ts=2 sw=2 sts=2
 
+" ruby
+autocmd Filetype ruby setlocal ts=2 sw=2 sts=2
+
 " groovy
 autocmd Filetype groovy setlocal ts=3 sw=3 sts=3
 au BufNewFile,BufReadPost Jenkinsfile set filetype=groovy
