@@ -49,6 +49,9 @@ Plug 'wavded/vim-stylus', { 'for': 'stylus' }
 " rust
 Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust', 'do': 'cargo +nightly install racer; rustup component add rust-src' }
 
+" editorconfig
+Plug 'editorconfig/editorconfig-vim'
+
 call plug#end()
 
 let g:python_host_prog = expand('$HOME') . '/.pyenv/versions/nvim2/bin/python'
@@ -132,7 +135,7 @@ autocmd Filetype py
 let python_highlight_all=1
 
 " javascript
-let g:neomake_javascript_enabled_makers = ['standard']
+let g:neomake_javascript_enabled_makers = ['eslint']
 autocmd Filetype javascript setlocal ts=2 sw=2 sts=2
 let g:tern#filetypes = [ 'jsx' ]
 
