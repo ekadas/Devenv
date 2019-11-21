@@ -40,6 +40,10 @@ Plug 'carlitux/deoplete-ternjs', { 'for': 'javascript', 'do': 'sudo npm install 
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'maxmellon/vim-jsx-pretty', { 'for': 'javascript' }
 
+" typescript
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+Plug 'ianks/vim-tsx', { 'for': 'typescriptreact' }
+
 " html
 Plug 'vim-scripts/HTML-AutoCloseTag', { 'for': 'html' }
 
@@ -138,6 +142,11 @@ let python_highlight_all=1
 let g:neomake_javascript_enabled_makers = ['eslint']
 autocmd Filetype javascript setlocal ts=2 sw=2 sts=2
 let g:tern#filetypes = [ 'jsx' ]
+
+" typescript
+au BufNewFile,BufRead *.tsx setlocal ft=typescript
+let g:neomake_typescript_enabled_makers = ['tslint']
+autocmd Filetype typescript setlocal ts=2 sw=2 sts=2
 
 " json
 autocmd Filetype json setlocal ts=2 sw=2 sts=2
