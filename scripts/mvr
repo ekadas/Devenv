@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e
+
+FROM=$1
+TO=$2
+EXTENSION=$3
+
+mv $FROM.$EXTENSION $TO.$EXTENSION
+
+sed -i '' -- "s/${FROM}/${TO}/g" ${TO}.${EXTENSION}
