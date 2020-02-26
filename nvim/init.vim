@@ -36,7 +36,7 @@ Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 
 " javascript
-Plug 'carlitux/deoplete-ternjs', { 'for': 'javascript', 'do': 'sudo npm install -g tern' }
+Plug 'carlitux/deoplete-ternjs', { 'for': 'javascript', 'do': 'npm install -g tern' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'maxmellon/vim-jsx-pretty', { 'for': 'javascript' }
 
@@ -150,6 +150,7 @@ autocmd Filetype typescript setlocal ts=2 sw=2 sts=2
 
 " json
 autocmd Filetype json setlocal ts=2 sw=2 sts=2
+let g:neomake_typescript_enabled_makers = ['jsonlint']
 
 " yaml
 autocmd Filetype yaml setlocal ts=2 sw=2 sts=2
