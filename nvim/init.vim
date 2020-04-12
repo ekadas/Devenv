@@ -146,11 +146,11 @@ let g:tern#filetypes = [ 'jsx' ]
 " typescript
 au BufNewFile,BufRead *.tsx setlocal ft=typescript
 let g:neomake_typescript_enabled_makers = ['tslint']
-autocmd Filetype typescript setlocal ts=2 sw=2 sts=2
+autocmd Filetype typescript setlocal noexpandtab
 
 " json
 autocmd Filetype json setlocal ts=2 sw=2 sts=2
-let g:neomake_typescript_enabled_makers = ['jsonlint']
+let g:neomake_json_enabled_makers = ['jsonlint']
 
 " yaml
 autocmd Filetype yaml setlocal ts=2 sw=2 sts=2
