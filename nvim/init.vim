@@ -139,7 +139,7 @@ autocmd Filetype py
 let python_highlight_all=1
 
 " javascript
-let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_javascript_enabled_makers = ['standard']
 autocmd Filetype javascript setlocal ts=2 sw=2 sts=2
 let g:tern#filetypes = [ 'jsx' ]
 
