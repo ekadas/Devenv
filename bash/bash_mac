@@ -6,15 +6,7 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
    . $(brew --prefix)/etc/bash_completion
 fi
 
-alias tw="open -a /Applications/TextWrangler.app"
-
-CLOUDSDK_INSTALL_DIR=/usr/local/share/google-cloud-sdk
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f "$CLOUDSDK_INSTALL_DIR/path.bash.inc" ]; then . "$CLOUDSDK_INSTALL_DIR/path.bash.inc"; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f "$CLOUDSDK_INSTALL_DIR/completion.bash.inc" ]; then . "$CLOUDSDK_INSTALL_DIR/completion.bash.inc"; fi
+export JAVA_HOME='/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home'
 
 source <(kubectl completion bash)
 export BASH_SILENCE_DEPRECATION_WARNING=1
