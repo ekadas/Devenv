@@ -5,3 +5,5 @@ source ~/Devenv/bash/bash_common
 source /usr/share/git/completion/git-prompt.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+export PATH="$HOME/.cargo/bin:$PATH"
