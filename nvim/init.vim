@@ -51,7 +51,8 @@ Plug 'vim-scripts/HTML-AutoCloseTag', { 'for': 'html' }
 Plug 'wavded/vim-stylus', { 'for': 'stylus' }
 
 " rust
-Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust', 'do': 'cargo +nightly install racer; rustup component add rust-src' }
+Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust', 'do': 'cargo +nightly install racer; rustup component add rust-src; rustup component add clippy' }
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
 " editorconfig
 Plug 'editorconfig/editorconfig-vim'
@@ -177,7 +178,7 @@ autocmd Filetype tf setlocal ts=2 sw=2 sts=2
 
 " rust
 let g:neomake_rust_enabled_makers = ['cargo']
-let g:neomake_rust_cargo_command = ['check']
+let g:neomake_rust_cargo_command = ['clippy']
 let g:rustfmt_autosave = 1
 let g:deoplete#sources#rust#racer_binary = expand('$HOME') . '/.cargo/bin/racer'
 let g:deoplete#sources#rust#rust_source_path = system('echo -n "$(rustc --print sysroot)"') . '/lib/rustlib/src/rust/src'
