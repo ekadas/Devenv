@@ -54,6 +54,9 @@ Plug 'wavded/vim-stylus', { 'for': 'stylus' }
 Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust', 'do': 'cargo +nightly install racer; rustup component add rust-src; rustup component add clippy' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
+" graphql
+Plug 'jparise/vim-graphql', { 'for': 'graphql' }
+
 " editorconfig
 Plug 'editorconfig/editorconfig-vim'
 
