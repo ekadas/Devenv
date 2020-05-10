@@ -3,9 +3,9 @@ call plug#begin('~/.local/share/nvim/plugged')
 " auto closes brackets
 Plug 'jiangmiao/auto-pairs'
 
-" airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" status bar
+Plug 'itchyny/lightline.vim'
+Plug 'mengelbrecht/lightline-bufferline'
 
 " fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -125,9 +125,36 @@ colorscheme srcery
 " more responsive timeout
 set ttimeoutlen=50
 
-" airline & statusline
-let g:airline#extensions#tabline#enabled=1
-let g:airline_theme='wombat'
+" statusline
+set showtabline=2
+let g:lightline = {
+      \ 'colorscheme': 'srcery_drk',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'filetype' ] ]
+      \ },
+      \ 'tabline': {
+      \   'left': [ [ 'buffers' ] ],
+      \   'right': [],
+      \ },
+      \ 'component': {
+      \   'lineinfo': "%{line('.') . '/' . line('$')}",
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ 'component_expand': {
+      \   'buffers': 'lightline#bufferline#buffers'
+      \ },
+      \ 'component_type': {
+      \   'buffers': 'tabsel'
+      \ }
+      \ }
+if !has('gui_running')
+  set t_Co=256
+endif
 set laststatus=2
 
 " python
