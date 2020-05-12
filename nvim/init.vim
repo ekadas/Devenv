@@ -15,6 +15,7 @@ Plug 'tpope/vim-fugitive'
 
 " Autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 
 " quick commenting
 Plug 'scrooloose/nerdcommenter'
@@ -47,8 +48,8 @@ Plug 'ianks/vim-tsx', { 'for': 'typescriptreact' }
 " html
 Plug 'vim-scripts/HTML-AutoCloseTag', { 'for': 'html' }
 
-" stylus
-Plug 'wavded/vim-stylus', { 'for': 'stylus' }
+" elm
+Plug 'andys8/vim-elm-syntax', { 'for': 'elm', 'do': 'npm install -g elm elm-test elm-format @elm-tooling/elm-language-server' }
 
 " rust
 Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust', 'do': 'cargo +nightly install racer; rustup component add rust-src; rustup component add clippy' }
@@ -190,8 +191,29 @@ autocmd Filetype yaml setlocal ts=2 sw=2 sts=2
 au BufNewFile,BufRead *.jinja setlocal ft=yaml
 autocmd Filetype jinja setlocal ts=2 sw=2 sts=2
 
-" stylus
-autocmd Filetype stylus setlocal ts=2 sw=2 sts=2
+" elm
+autocmd Filetype elm setlocal ts=4 sw=4 sts=4
+let g:elm_format_autosave = 1
+" lsp
+let g:LanguageClient_serverCommands = {
+  \ 'elm': ['elm-language-server'],
+  \ }
+let g:LanguageClient_rootMarkers = {
+  \ 'elm': ['elm.json'],
+  \ }
+function LC_maps()
+  if has_key(g:LanguageClient_serverCommands, &filetype)
+    " Bind K to show documentation for the current symbol
+    nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<cr>
+    " Bind gd to go to the definition of a symbol
+    nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>
+    " Bind <F2> to global rename
+    nnoremap <buffer> <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+  endif
+endfunction
+" Execute the bindings for supported languages
+autocmd FileType elm call LC_maps()
+autocmd BufWritePre *.elm :call LanguageClient#textDocument_formatting_sync()
 
 " stylus
 autocmd Filetype scss setlocal ts=2 sw=2 sts=2
