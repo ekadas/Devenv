@@ -61,6 +61,9 @@ Plug 'jparise/vim-graphql', { 'for': 'graphql' }
 " editorconfig
 Plug 'editorconfig/editorconfig-vim'
 
+" prettier
+Plug 'prettier/vim-prettier', { 'do': 'npm install && npm install -g prettier prettier-plugin-java' }
+
 call plug#end()
 
 let g:python_host_prog = expand('$HOME') . '/.pyenv/versions/nvim2/bin/python'
@@ -238,5 +241,8 @@ let g:deoplete#sources#rust#rust_source_path = system('echo -n "$(rustc --print 
 " Nerdtree
 map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" prettier
+autocmd BufWritePre *.java PrettierAsync
 
 filetype plugin indent on
