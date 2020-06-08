@@ -1,6 +1,6 @@
 [user]
 	name = Endre Kadas
-   email = ekadas@gmail.com
+	email = ekadas@gmail.com
 [push]
 	default = simple
 [alias]
@@ -10,7 +10,7 @@
 	pp = pull --all --prune
 	new = checkout -b
 	ci = commit -m
-   ca = commit -a -m
+	ca = commit -a -m
 	unstage = reset HEAD --
 	graph = log --graph --abbrev-commit --decorate --date=short --format=format:'%C(bold blue)%h%C(reset)%C(bold yellow)%d%C(reset) - %C(bold white)%s%C(reset)'
 	fgraph = log --graph --abbrev-commit --decorate --date=short --format=format:'%C(bold blue)%h%C(reset)%C(bold yellow)%d%C(reset) - %C(bold white)%s%C(reset) %C(dim white)- %an %C(dim blue)%cd %C(reset)'
@@ -18,3 +18,5 @@
 	helper = store
 [core]
 	excludesfile = ~/.gitexcludes
+[pull]
+	rebase = false
