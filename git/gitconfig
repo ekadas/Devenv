@@ -8,6 +8,7 @@
 	st = status
 	br = branch
 	pp = pull --all --prune
+	fp = fetch --all --prune
 	new = checkout -b
 	ci = commit -m
 	ca = commit -a -m
