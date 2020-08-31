@@ -226,9 +226,10 @@ function LS_maps()
 endfunction
 lua <<EOF
 require'nvim_lsp'.elmls.setup{}
+require'nvim_lsp'.bashls.setup{}
 EOF
 " Execute the bindings for supported languages
-autocmd FileType elm call LS_maps()
+autocmd FileType elm,sh,bash call LS_maps()
 autocmd BufWritePre *.elm lua vim.lsp.buf.formatting_sync(nil, 1000)
 
 " Nerdtree
