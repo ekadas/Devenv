@@ -24,7 +24,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
 
 " Colorscheme
-Plug 'roosta/srcery'
+Plug 'srcery-colors/srcery-vim'
 
 " linting like behaviour
 Plug 'neomake/neomake'
@@ -104,26 +104,12 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " fzf configs
 :noremap <C-p> :FZF<CR>
 let g:fzf_layout = { 'down': '~20%' }
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
 
 " neomake
 let g:neomake_open_list=2
 autocmd! BufWritePost * Neomake
 
 " colors
-set background=dark
 colorscheme srcery
 
 " more responsive timeout
@@ -132,7 +118,7 @@ set ttimeoutlen=50
 " statusline
 set showtabline=2
 let g:lightline = {
-      \ 'colorscheme': 'srcery_drk',
+      \ 'colorscheme': 'srcery',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
