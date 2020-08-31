@@ -227,9 +227,30 @@ endfunction
 lua <<EOF
 require'nvim_lsp'.elmls.setup{}
 require'nvim_lsp'.bashls.setup{}
+require'nvim_lsp'.yamlls.setup{
+   settings = {
+      yaml = {
+         schemas = {
+            ['https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json'] = 'cloudformation/*'
+         },
+         customTags = {
+            "!Equals sequence",
+            "!FindInMap sequence",
+            "!GetAtt",
+            "!GetAZs",
+            "!ImportValue",
+            "!Join sequence",
+            "!Ref",
+            "!Select sequence",
+            "!Split sequence",
+            "!Sub"
+         }
+      }
+   }
+}
 EOF
 " Execute the bindings for supported languages
-autocmd FileType elm,sh,bash call LS_maps()
+autocmd FileType elm,sh,bash,yaml call LS_maps()
 autocmd BufWritePre *.elm lua vim.lsp.buf.formatting_sync(nil, 1000)
 
 " Nerdtree
@@ -239,6 +260,5 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " prettier
 autocmd BufWritePre *.java PrettierAsync
 autocmd BufWritePre *.json PrettierAsync
-autocmd BufWritePre *.yaml PrettierAsync
 
 filetype plugin indent on
