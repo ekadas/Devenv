@@ -171,7 +171,6 @@ autocmd Filetype typescript setlocal noexpandtab
 
 " json
 autocmd Filetype json setlocal ts=2 sw=2 sts=2
-let g:neomake_json_enabled_makers = ['jsonlint']
 
 " yaml
 autocmd Filetype yaml setlocal ts=2 sw=2 sts=2
@@ -234,9 +233,22 @@ require'nvim_lsp'.yamlls.setup{
       }
    }
 }
+require'nvim_lsp'.jsonls.setup{
+   settings = {
+      json = {
+         schemas = {
+            {
+               description = 'AWS IAM configuration',
+               fileMatch = { 'iam/*.json' },
+               url = 'https://gist.githubusercontent.com/jstewmon/ee5d4b7ec0d8d60cbc303cb515272f8a/raw/fc6977788b85ea52e9acad0347287516157b5865/aws-iam-poilcy-schema.json'
+            }
+         }
+      }
+   }
+}
 EOF
 " Execute the bindings for supported languages
-autocmd FileType elm,sh,bash,yaml call LS_maps()
+autocmd FileType elm,sh,bash,yaml,json call LS_maps()
 autocmd BufWritePre *.elm lua vim.lsp.buf.formatting_sync(nil, 1000)
 
 " Nerdtree
@@ -245,6 +257,5 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " prettier
 autocmd BufWritePre *.java PrettierAsync
-autocmd BufWritePre *.json PrettierAsync
 
 filetype plugin indent on
