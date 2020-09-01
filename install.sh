@@ -56,8 +56,7 @@ if [ "$OS" = "Darwin" ]; then
 fi
 
 if [ "$OS" = "Darwin" ]; then
-   # NOTE: this may require setting pyenv first
-   confirm "gcloud" gcloud/install.sh
+   confirm "awscli" awscli/install.sh
 fi
 
 if [ "$OS" = "Darwin" ]; then
