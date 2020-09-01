@@ -216,7 +216,8 @@ require'nvim_lsp'.yamlls.setup{
    settings = {
       yaml = {
          schemas = {
-            ['https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json'] = 'cloudformation/*'
+            ['https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json'] = 'cloudformation/*',
+            ['http://json.schemastore.org/github-workflow'] = '.github/workflows/*'
          },
          customTags = {
             "!Equals sequence",
