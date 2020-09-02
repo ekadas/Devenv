@@ -186,8 +186,7 @@ let g:deoplete#sources#rust#rust_source_path = system('echo -n "$(rustc --print 
 function LS_maps()
    setlocal omnifunc=v:lua.vim.lsp.omnifunc
    nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-   nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
-   nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+   nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
 endfunction
 lua <<EOF
 require'nvim_lsp'.elmls.setup{}
