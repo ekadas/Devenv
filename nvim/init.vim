@@ -55,9 +55,6 @@ Plug 'andys8/vim-elm-syntax', { 'for': 'elm', 'do': 'npm install -g elm elm-test
 Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust', 'do': 'cargo +nightly install racer; rustup component add rust-src; rustup component add clippy' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
-" graphql
-Plug 'jparise/vim-graphql', { 'for': 'graphql' }
-
 " editorconfig
 Plug 'editorconfig/editorconfig-vim'
 
@@ -175,25 +172,8 @@ autocmd Filetype json setlocal ts=2 sw=2 sts=2
 " yaml
 autocmd Filetype yaml setlocal ts=2 sw=2 sts=2
 
-" jinja
-au BufNewFile,BufRead *.jinja setlocal ft=yaml
-autocmd Filetype jinja setlocal ts=2 sw=2 sts=2
-
 " elm
 autocmd Filetype elm setlocal ts=4 sw=4 sts=4
-
-" stylus
-autocmd Filetype scss setlocal ts=2 sw=2 sts=2
-
-" ruby
-autocmd Filetype ruby setlocal ts=2 sw=2 sts=2
-
-" groovy
-autocmd Filetype groovy setlocal ts=3 sw=3 sts=3
-au BufNewFile,BufReadPost Jenkinsfile set filetype=groovy
-
-" tf
-autocmd Filetype tf setlocal ts=2 sw=2 sts=2
 
 " rust
 let g:neomake_rust_enabled_makers = ['cargo']
