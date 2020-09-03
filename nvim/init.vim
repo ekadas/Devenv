@@ -226,9 +226,10 @@ require'nvim_lsp'.jsonls.setup{
       }
    }
 }
+require'nvim_lsp'.tsserver.setup{}
 EOF
 " Execute the bindings for supported languages
-autocmd FileType elm,sh,bash,yaml,json call LS_maps()
+autocmd FileType elm,sh,bash,yaml,json,javascript call LS_maps()
 autocmd BufWritePre *.elm lua vim.lsp.buf.formatting_sync(nil, 1000)
 
 " Nerdtree
