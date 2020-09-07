@@ -37,7 +37,6 @@ Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 
 " javascript
-Plug 'carlitux/deoplete-ternjs', { 'for': 'javascript', 'do': 'npm install -g tern' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'maxmellon/vim-jsx-pretty', { 'for': 'javascript' }
 
@@ -159,7 +158,6 @@ let python_highlight_all=1
 " javascript
 let g:neomake_javascript_enabled_makers = ['standard']
 autocmd Filetype javascript setlocal ts=2 sw=2 sts=2
-let g:tern#filetypes = [ 'jsx' ]
 
 " typescript
 au BufNewFile,BufRead *.tsx setlocal ft=typescript
@@ -238,5 +236,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " prettier
 autocmd BufWritePre *.java PrettierAsync
+autocmd BufWritePre *.json PrettierAsync
 
 filetype plugin indent on
