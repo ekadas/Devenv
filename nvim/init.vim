@@ -15,7 +15,8 @@ Plug 'tpope/vim-fugitive'
 
 " Autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'neovim/nvim-lsp'
+Plug 'Shougo/deoplete-lsp'
+Plug 'neovim/nvim-lspconfig'
 
 " quick commenting
 Plug 'scrooloose/nerdcommenter'
