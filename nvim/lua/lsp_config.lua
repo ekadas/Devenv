@@ -49,3 +49,14 @@ require'nvim_lsp'.jsonls.setup{
 }
 
 require'nvim_lsp'.tsserver.setup{}
+
+require'nvim_lsp'.rust_analyzer.setup{
+   settings = {
+      ['rust-analyzer'] = {
+         checkOnSave = {
+            enable = true,
+            command = 'clippy'
+         }
+      }
+   }
+}

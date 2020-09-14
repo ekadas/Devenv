@@ -52,7 +52,6 @@ Plug 'vim-scripts/HTML-AutoCloseTag', { 'for': 'html' }
 Plug 'andys8/vim-elm-syntax', { 'for': 'elm', 'do': 'npm install -g elm elm-test elm-format @elm-tooling/elm-language-server' }
 
 " rust
-Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust', 'do': 'cargo +nightly install racer; rustup component add rust-src; rustup component add clippy' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
 " editorconfig
@@ -175,11 +174,7 @@ autocmd Filetype yaml setlocal ts=2 sw=2 sts=2
 autocmd Filetype elm setlocal ts=4 sw=4 sts=4
 
 " rust
-let g:neomake_rust_enabled_makers = ['cargo']
-let g:neomake_rust_cargo_command = ['clippy']
 let g:rustfmt_autosave = 1
-let g:deoplete#sources#rust#racer_binary = expand('$HOME') . '/.cargo/bin/racer'
-let g:deoplete#sources#rust#rust_source_path = system('echo -n "$(rustc --print sysroot)"') . '/lib/rustlib/src/rust/src'
 
 " lsp
 function LS_maps()
@@ -189,8 +184,8 @@ function LS_maps()
 endfunction
 lua require("lsp_config")
 " Execute the bindings for supported languages
-autocmd FileType elm,sh,bash,yaml,json,javascript call LS_maps()
-autocmd BufWritePre *.elm lua vim.lsp.buf.formatting_sync(nil, 1000)
+autocmd FileType elm,sh,bash,yaml,json,javascript,rust call LS_maps()
+autocmd BufWritePre *.elm,*.yaml,*.json,*.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
 
 " Nerdtree
 map <C-n> :NERDTreeToggle<CR>
