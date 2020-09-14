@@ -124,10 +124,11 @@ let g:lightline = {
       \   'right': [],
       \ },
       \ 'component': {
-      \   'lineinfo': "%{line('.') . '/' . line('$')}",
+      \   'lineinfo': "(%c) %{line('.') . '/' . line('$')}",
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead'
+      \   'gitbranch': 'FugitiveHead',
+      \   'filename': 'LightlineFilename'
       \ },
       \ 'component_expand': {
       \   'buffers': 'lightline#bufferline#buffers'
@@ -139,7 +140,16 @@ let g:lightline = {
 if !has('gui_running')
   set t_Co=256
 endif
+set noshowmode
 set laststatus=2
+function! LightlineFilename()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root)-1] ==# root
+    return path[len(root)+1:]
+  endif
+  return expand('%')
+endfunction
 
 " python
 let g:neomake_python_enabled_makers = ['flake8']
