@@ -34,7 +34,6 @@ Plug 'neomake/neomake'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " Python
-Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
 
 " javascript
@@ -43,7 +42,6 @@ Plug 'maxmellon/vim-jsx-pretty', { 'for': 'javascript' }
 
 " typescript
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-Plug 'ianks/vim-tsx', { 'for': 'typescriptreact' }
 
 " html
 Plug 'vim-scripts/HTML-AutoCloseTag', { 'for': 'html' }
@@ -80,8 +78,8 @@ set pastetoggle=<F2>
 " allows switching buffers without save
 set hidden
 
-" allows copy in visual mode
-:vnoremap <C-c> "+y
+" sets use of system clipboard
+set clipboard+=unnamedplus
 
 " buffer shortcuts
 :noremap <C-l> :bnext<CR>
@@ -185,7 +183,7 @@ endfunction
 lua require("lsp_config")
 " Execute the bindings for supported languages
 autocmd FileType elm,sh,bash,yaml,json,javascript,rust call LS_maps()
-autocmd BufWritePre *.elm,*.yaml,*.json,*.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
+autocmd BufWritePre *.elm,*.yaml,*.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
 
 " Nerdtree
 map <C-n> :NERDTreeToggle<CR>
