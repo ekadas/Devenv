@@ -193,7 +193,7 @@ endfunction
 lua require("lsp_config")
 " Execute the bindings for supported languages
 autocmd FileType elm,sh,bash,yaml,json,javascript,rust call LS_maps()
-autocmd BufWritePre *.elm,*.yaml,*.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
+autocmd BufWritePre *.elm,*.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
 
 " Nerdtree
 map <C-n> :NERDTreeToggle<CR>
