@@ -13,10 +13,9 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " git
 Plug 'tpope/vim-fugitive'
 
-" Autocompletion
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/deoplete-lsp'
+" LSP
 Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
 
 " quick commenting
 Plug 'scrooloose/nerdcommenter'
@@ -89,11 +88,11 @@ set clipboard+=unnamedplus
 " visually selected text search
 :vnoremap // y/<C-R>"<CR>
 
-" deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_completion_start_length = 1 
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" auto completion
+autocmd BufEnter * lua require'completion'.on_attach()
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+imap <silent> <s-tab> <Plug>(completion_trigger)
+set completeopt=menuone,noinsert,noselect
 
 " fzf configs
 :noremap <C-p> :FZF<CR>
