@@ -13,9 +13,10 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " git
 Plug 'tpope/vim-fugitive'
 
-" LSP
+" lsp
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
+Plug 'nvim-lua/diagnostic-nvim'
 
 " quick commenting
 Plug 'scrooloose/nerdcommenter'
@@ -88,22 +89,16 @@ set clipboard+=unnamedplus
 " visually selected text search
 :vnoremap // y/<C-R>"<CR>
 
-" auto completion
-autocmd BufEnter * lua require'completion'.on_attach()
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-imap <silent> <s-tab> <Plug>(completion_trigger)
-set completeopt=menuone,noinsert,noselect
-
 " fzf configs
 :noremap <C-p> :FZF<CR>
 let g:fzf_layout = { 'down': '~20%' }
 
+" colors
+colorscheme srcery
+
 " neomake
 let g:neomake_open_list=2
 autocmd! BufWritePost * Neomake
-
-" colors
-colorscheme srcery
 
 " more responsive timeout
 set ttimeoutlen=50
@@ -151,13 +146,11 @@ function! LightlineFilename()
 endfunction
 
 " python
-let g:neomake_python_enabled_makers = ['flake8']
 autocmd Filetype py 
    \ setlocal tabstop=4
    \ setlocal softtabstop=4
    \ setlocal shiftwidth=4
    \ setlocal textwidth=71
-   \ setlocal autoindent
    \ setlocal fileformat=unix
    \ setlocal encoding=utf-8
 let python_highlight_all=1
@@ -165,11 +158,6 @@ let python_highlight_all=1
 " javascript
 let g:neomake_javascript_enabled_makers = ['standard']
 autocmd Filetype javascript setlocal ts=2 sw=2 sts=2
-
-" typescript
-au BufNewFile,BufRead *.tsx setlocal ft=typescript
-let g:neomake_typescript_enabled_makers = ['tslint']
-autocmd Filetype typescript setlocal noexpandtab
 
 " json
 autocmd Filetype json setlocal ts=2 sw=2 sts=2
@@ -186,13 +174,20 @@ let g:rustfmt_autosave = 1
 " lsp
 function LS_maps()
    setlocal omnifunc=v:lua.vim.lsp.omnifunc
-   nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-   nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
+   nnoremap <silent> K       <cmd>lua vim.lsp.buf.hover()<CR>
+   nnoremap <silent> gd      <cmd>lua vim.lsp.buf.definition()<CR>
+   nnoremap <silent> <space> <cmd>NextDiagnosticCycle<CR>
 endfunction
 lua require("lsp_config")
 " Execute the bindings for supported languages
 autocmd FileType elm,sh,bash,yaml,json,javascript,rust call LS_maps()
 autocmd BufWritePre *.elm,*.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+imap <silent> <s-tab> <Plug>(completion_trigger)
+set completeopt=menuone,noinsert,noselect
+sign define LspDiagnosticsHintSign text=💡
+sign define LspDiagnosticsErrorSign text=🩸
+sign define LspDiagnosticsWarningSign text=⚡
 
 " Nerdtree
 map <C-n> :NERDTreeToggle<CR>
@@ -201,5 +196,3 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " prettier
 autocmd BufWritePre *.java PrettierAsync
 autocmd BufWritePre *.json PrettierAsync
-
-filetype plugin indent on

@@ -1,8 +1,18 @@
-require'nvim_lsp'.elmls.setup{}
+local on_attach_vim = function(client)
+  require'completion'.on_attach(client)
+  require'diagnostic'.on_attach(client)
+end
 
-require'nvim_lsp'.bashls.setup{}
+require'nvim_lsp'.elmls.setup{
+   on_attach=on_attach_vim
+}
+
+require'nvim_lsp'.bashls.setup{
+   on_attach=on_attach_vim
+}
 
 require'nvim_lsp'.yamlls.setup{
+   on_attach=on_attach_vim,
    settings = {
       yaml = {
          schemas = {
@@ -35,6 +45,7 @@ require'nvim_lsp'.yamlls.setup{
 }
 
 require'nvim_lsp'.jsonls.setup{
+   on_attach=on_attach_vim,
    settings = {
       json = {
          schemas = {
@@ -48,9 +59,12 @@ require'nvim_lsp'.jsonls.setup{
    }
 }
 
-require'nvim_lsp'.tsserver.setup{}
+require'nvim_lsp'.tsserver.setup{
+   on_attach=on_attach_vim
+}
 
 require'nvim_lsp'.rust_analyzer.setup{
+   on_attach=on_attach_vim,
    settings = {
       ['rust-analyzer'] = {
          checkOnSave = {
