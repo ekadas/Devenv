@@ -78,8 +78,11 @@ set pastetoggle=<F2>
 " allows switching buffers without save
 set hidden
 
-" sets use of system clipboard
-set clipboard+=unnamedplus
+" remap copy paste
+vnoremap <leader>y "+y
+nnoremap <leader>y "+y
+vnoremap <leader>p "+p
+nnoremap <leader>p "+p
 
 " buffer shortcuts
 :noremap <C-l> :bnext<CR>
