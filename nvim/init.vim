@@ -47,7 +47,7 @@ Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'vim-scripts/HTML-AutoCloseTag', { 'for': 'html' }
 
 " elm
-Plug 'andys8/vim-elm-syntax', { 'for': 'elm', 'do': 'npm install -g elm elm-test elm-format @elm-tooling/elm-language-server' }
+Plug 'andys8/vim-elm-syntax', { 'for': 'elm', 'do': 'npm install -g elm elm-test elm-format' }
 
 " rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
@@ -189,6 +189,7 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 imap <silent> <s-tab> <Plug>(completion_trigger)
 set completeopt=menuone,noinsert,noselect
 sign define LspDiagnosticsHintSign text=💡
+sign define LspDiagnosticsInformationSign text=❕
 sign define LspDiagnosticsErrorSign text=🩸
 sign define LspDiagnosticsWarningSign text=⚡
 
