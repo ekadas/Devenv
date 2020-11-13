@@ -1,0 +1,26 @@
+#!/bin/bash
+set -euo pipefail
+shopt -s expand_aliases
+history=$(git releaselog)
+declare breaks features fixes others
+while IFS= read -r line; do
+    type=$(echo $line | cut -d" " -f2)
+    if [[ $type == *"!"* ]]; then type='break:'; fi
+    case "$type" in
+      break:)
+        if [[ -z $breaks ]]; then breaks="- $line"; else breaks="$breaks\n- $line"; fi
+        ;;
+      feat:)
+        if [[ -z $features ]]; then features="- $line"; else features="$features\n- $line"; fi
+        ;;
+      fix:)
+        if [[ -z $fixes ]]; then fixes="- $line"; else fixes="$fixes\n- $line"; fi
+        ;;
+      *)
+        if [[ -z $others ]]; then others="- $line"; else others="$others\n- $line"; fi
+    esac
+done <<< "$history"
+if [[ !  -z  $breaks  ]]; then echo -e "# Breaking Changes\n$breaks\n"; fi
+if [[ !  -z  $features  ]]; then echo -e "# Features\n$features\n"; fi
+if [[ !  -z  $fixes  ]]; then echo -e "# Fixes\n$fixes\n"; fi
+if [[ !  -z  $others  ]]; then echo -e "# Other Changes\n$others\n"; fi
