@@ -105,39 +105,13 @@ autocmd! BufWritePost * Neomake
 " more responsive timeout
 set ttimeoutlen=50
 
-" statusline
+" lightline
 set showtabline=2
-let g:lightline = {
-      \ 'colorscheme': 'srcery',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'filetype' ] ]
-      \ },
-      \ 'tabline': {
-      \   'left': [ [ 'buffers' ] ],
-      \   'right': [],
-      \ },
-      \ 'component': {
-      \   'lineinfo': "(%c) %{line('.') . '/' . line('$')}",
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead',
-      \   'filename': 'LightlineFilename'
-      \ },
-      \ 'component_expand': {
-      \   'buffers': 'lightline#bufferline#buffers'
-      \ },
-      \ 'component_type': {
-      \   'buffers': 'tabsel'
-      \ }
-      \ }
+set noshowmode
+set laststatus=2
 if !has('gui_running')
   set t_Co=256
 endif
-set noshowmode
-set laststatus=2
 function! LightlineFilename()
   let root = fnamemodify(get(b:, 'git_dir'), ':h')
   let path = expand('%:p')
@@ -146,6 +120,7 @@ function! LightlineFilename()
   endif
   return expand('%')
 endfunction
+lua require('lightline')
 
 " python
 autocmd Filetype py 
