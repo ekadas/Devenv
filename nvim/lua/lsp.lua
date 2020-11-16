@@ -1,18 +1,32 @@
-local on_attach_vim = function(client)
-  require'completion'.on_attach(client)
-  require'diagnostic'.on_attach(client)
+local lspconfig = require'lspconfig'
+local completion = require'completion'
+local sign_define = vim.fn.sign_define
+
+local local_on_attach = function(client)
+   vim.api.nvim_buf_set_keymap(0, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true})
+   vim.api.nvim_buf_set_keymap(0, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true})
+   vim.api.nvim_buf_set_keymap(0, 'n', '<space>', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', {noremap = true})
+
+   vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+   completion.on_attach(client)
 end
 
-require'nvim_lsp'.elmls.setup{
-   on_attach=on_attach_vim
+sign_define('LspDiagnosticsSignWarning', {text='⚡'})
+sign_define('LspDiagnosticsSignHint', {text='💡'})
+sign_define('LspDiagnosticsSignInformation', {text='❕'})
+sign_define('LspDiagnosticsSignError', {text='🩸'})
+
+lspconfig.elmls.setup{
+   on_attach=local_on_attach
 }
 
-require'nvim_lsp'.bashls.setup{
-   on_attach=on_attach_vim
+lspconfig.bashls.setup{
+   on_attach=local_on_attach
 }
 
-require'nvim_lsp'.yamlls.setup{
-   on_attach=on_attach_vim,
+lspconfig.yamlls.setup{
+   on_attach=local_on_attach,
    settings = {
       yaml = {
          schemas = {
@@ -44,8 +58,8 @@ require'nvim_lsp'.yamlls.setup{
    }
 }
 
-require'nvim_lsp'.jsonls.setup{
-   on_attach=on_attach_vim,
+lspconfig.jsonls.setup{
+   on_attach=local_on_attach,
    settings = {
       json = {
          schemas = {
@@ -59,12 +73,12 @@ require'nvim_lsp'.jsonls.setup{
    }
 }
 
-require'nvim_lsp'.tsserver.setup{
-   on_attach=on_attach_vim
+lspconfig.tsserver.setup{
+   on_attach=local_on_attach
 }
 
-require'nvim_lsp'.rust_analyzer.setup{
-   on_attach=on_attach_vim,
+lspconfig.rust_analyzer.setup{
+   on_attach=local_on_attach,
    settings = {
       ['rust-analyzer'] = {
          checkOnSave = {

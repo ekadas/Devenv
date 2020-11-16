@@ -16,7 +16,6 @@ Plug 'tpope/vim-fugitive'
 " lsp
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
-Plug 'nvim-lua/diagnostic-nvim'
 
 " quick commenting
 Plug 'scrooloose/nerdcommenter'
@@ -175,23 +174,13 @@ autocmd Filetype elm setlocal ts=4 sw=4 sts=4
 let g:rustfmt_autosave = 1
 
 " lsp
-function LS_maps()
-   setlocal omnifunc=v:lua.vim.lsp.omnifunc
-   nnoremap <silent> K       <cmd>lua vim.lsp.buf.hover()<CR>
-   nnoremap <silent> gd      <cmd>lua vim.lsp.buf.definition()<CR>
-   nnoremap <silent> <space> <cmd>NextDiagnosticCycle<CR>
-endfunction
-lua require("lsp_config")
-" Execute the bindings for supported languages
-autocmd FileType elm,sh,bash,yaml,json,javascript,rust call LS_maps()
+lua require('lsp')
 autocmd BufWritePre *.elm,*.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
+
+" completion
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 imap <silent> <s-tab> <Plug>(completion_trigger)
 set completeopt=menuone,noinsert,noselect
-sign define LspDiagnosticsHintSign text=💡
-sign define LspDiagnosticsInformationSign text=❕
-sign define LspDiagnosticsErrorSign text=🩸
-sign define LspDiagnosticsWarningSign text=⚡
 
 " Nerdtree
 map <C-n> :NERDTreeToggle<CR>
