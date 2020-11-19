@@ -43,9 +43,9 @@ confirm "tmux" tmux/install.sh
 
 confirm "git" git/install.sh
 
-confirm "neovim" nvim/install.sh
-
 confirm "nvm" nvm/install.sh
+
+confirm "neovim" nvim/install.sh
 
 confirm "rbenv" rbenv/install.sh
 

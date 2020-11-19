@@ -46,16 +46,13 @@ Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'vim-scripts/HTML-AutoCloseTag', { 'for': 'html' }
 
 " elm
-Plug 'andys8/vim-elm-syntax', { 'for': 'elm', 'do': 'npm install -g elm elm-test elm-format' }
+Plug 'andys8/vim-elm-syntax', { 'for': 'elm' }
 
 " rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
 " editorconfig
 Plug 'editorconfig/editorconfig-vim'
-
-" prettier
-Plug 'prettier/vim-prettier', { 'do': 'npm install && npm install -g prettier prettier-plugin-java' }
 
 call plug#end()
 
@@ -100,7 +97,7 @@ colorscheme srcery
 
 " neomake
 let g:neomake_open_list=2
-autocmd! BufWritePost * Neomake
+autocmd! BufWritePost *.java Neomake
 
 " more responsive timeout
 set ttimeoutlen=50
@@ -123,34 +120,13 @@ endfunction
 lua require('lightline')
 
 " python
-autocmd Filetype py 
-   \ setlocal tabstop=4
-   \ setlocal softtabstop=4
-   \ setlocal shiftwidth=4
-   \ setlocal textwidth=71
-   \ setlocal fileformat=unix
-   \ setlocal encoding=utf-8
 let python_highlight_all=1
-
-" javascript
-let g:neomake_javascript_enabled_makers = ['standard']
-autocmd Filetype javascript setlocal ts=2 sw=2 sts=2
-
-" json
-autocmd Filetype json setlocal ts=2 sw=2 sts=2
-
-" yaml
-autocmd Filetype yaml setlocal ts=2 sw=2 sts=2
-
-" elm
-autocmd Filetype elm setlocal ts=4 sw=4 sts=4
 
 " rust
 let g:rustfmt_autosave = 1
 
 " lsp
 lua require('lsp')
-autocmd BufWritePre *.elm,*.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
 
 " completion
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
@@ -160,7 +136,3 @@ set completeopt=menuone,noinsert,noselect
 " Nerdtree
 map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-" prettier
-autocmd BufWritePre *.java PrettierAsync
-autocmd BufWritePre *.json PrettierAsync

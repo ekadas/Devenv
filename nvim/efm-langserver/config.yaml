@@ -1,0 +1,30 @@
+version: 2
+root-markers:
+  - .git/
+
+tools:
+  prettier-java: &prettier-java
+    format-command: 'prettier --parser java'
+
+  prettier-json: &prettier-json
+    format-command: 'prettier --parser json'
+
+  prettier-yaml: &prettier-yaml
+    format-command: 'prettier --single-quote --parser yaml'
+
+  standard: &standard
+    format-command: 'standard --fix --stdin'
+    format-stdin: true
+
+languages:
+  java:
+    - <<: *prettier-java
+
+  javascript:
+    - <<: *standard
+
+  json:
+    - <<: *prettier-json
+
+  yaml:
+    - <<: *prettier-yaml

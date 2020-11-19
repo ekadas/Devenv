@@ -17,4 +17,9 @@ pip install neovim > /dev/null
 pyenv virtualenv -f $PYTHON3 nvim3 > /dev/null
 export PYENV_VERSION=nvim3
 pip install neovim > /dev/null
-ln -sf $BASEDIR/nvim ~/.config/nvim
+
+# install formatter
+## requires go
+source go/install.sh
+go get github.com/mattn/efm-langserver
+ln -sf $BASEDIR/nvim/efm-langserver ~/.config/efm-langserver

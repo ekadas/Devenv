@@ -2,7 +2,11 @@ local lspconfig = require'lspconfig'
 local completion = require'completion'
 local sign_define = vim.fn.sign_define
 
-local local_on_attach = function(client)
+local on_attach = function(client)
+   if client.resolved_capabilities.document_formatting then
+      vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()]]
+   end
+
    vim.api.nvim_buf_set_keymap(0, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true})
    vim.api.nvim_buf_set_keymap(0, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true})
    vim.api.nvim_buf_set_keymap(0, 'n', '<space>', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', {noremap = true})
@@ -12,21 +16,35 @@ local local_on_attach = function(client)
    completion.on_attach(client)
 end
 
+vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
+   if err ~= nil or result == nil then
+      return
+   end
+   if not vim.api.nvim_buf_get_option(bufnr, "modified") then
+      local view = vim.fn.winsaveview()
+      vim.lsp.util.apply_text_edits(result, bufnr)
+      vim.fn.winrestview(view)
+      if bufnr == vim.api.nvim_get_current_buf() then
+         vim.api.nvim_command("noautocmd :update")
+      end
+   end
+end
+
 sign_define('LspDiagnosticsSignWarning', {text='⚡'})
 sign_define('LspDiagnosticsSignHint', {text='💡'})
 sign_define('LspDiagnosticsSignInformation', {text='❕'})
 sign_define('LspDiagnosticsSignError', {text='🩸'})
 
 lspconfig.elmls.setup{
-   on_attach=local_on_attach
+   on_attach = on_attach
 }
 
 lspconfig.bashls.setup{
-   on_attach=local_on_attach
+   on_attach = on_attach
 }
 
 lspconfig.yamlls.setup{
-   on_attach=local_on_attach,
+   on_attach = on_attach,
    settings = {
       yaml = {
          schemas = {
@@ -59,7 +77,10 @@ lspconfig.yamlls.setup{
 }
 
 lspconfig.jsonls.setup{
-   on_attach=local_on_attach,
+   on_attach = function(client)
+      client.resolved_capabilities.document_formatting = false
+      on_attach(client)
+   end,
    settings = {
       json = {
          schemas = {
@@ -74,11 +95,14 @@ lspconfig.jsonls.setup{
 }
 
 lspconfig.tsserver.setup{
-   on_attach=local_on_attach
+   on_attach = function(client)
+      client.resolved_capabilities.document_formatting = false
+      on_attach(client)
+   end
 }
 
 lspconfig.rust_analyzer.setup{
-   on_attach=local_on_attach,
+   on_attach = on_attach,
    settings = {
       ['rust-analyzer'] = {
          checkOnSave = {
@@ -87,4 +111,8 @@ lspconfig.rust_analyzer.setup{
          }
       }
    }
+}
+
+lspconfig.efm.setup{
+   on_attach = on_attach
 }
