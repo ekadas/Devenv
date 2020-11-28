@@ -1,6 +1,5 @@
 #!/bin/bash
 
-PYTHON2=2.7.16
 PYTHON3=3.8.0
 
 BASEDIR="$( cd "$(dirname "$0")" ; pwd -P )"
