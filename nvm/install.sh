@@ -8,4 +8,9 @@ nvm install --lts
 nvm use --lts
 
 # install linters and formatters
-npm install -g prettier prettier-plugin-java standard
+npm install -g \
+   prettier \
+   prettier-plugin-java \
+   standard \
+   typescript \
+   typescript-language-server
