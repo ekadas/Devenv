@@ -13,4 +13,5 @@ npm install -g \
    prettier-plugin-java \
    standard \
    typescript \
-   typescript-language-server
+   typescript-language-server \
+   yaml-language-server

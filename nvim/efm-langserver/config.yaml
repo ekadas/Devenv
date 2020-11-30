@@ -10,7 +10,7 @@ tools:
     format-command: 'prettier --parser json'
 
   prettier-yaml: &prettier-yaml
-    format-command: 'prettier --single-quote --parser yaml'
+    format-command: 'prettier --parser yaml'
 
   standard: &standard
     format-command: 'standard --fix --stdin'
