@@ -14,4 +14,5 @@ npm install -g \
    standard \
    typescript \
    typescript-language-server \
+   vscode-json-languageserver \
    yaml-language-server
