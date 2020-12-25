@@ -4,7 +4,7 @@ local sign_define = vim.fn.sign_define
 
 local on_attach = function(client)
    if client.resolved_capabilities.document_formatting then
-      vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()]]
+      vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)]]
    end
 
    vim.api.nvim_buf_set_keymap(0, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true})
@@ -14,20 +14,6 @@ local on_attach = function(client)
    vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
    completion.on_attach(client)
-end
-
-vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
-   if err ~= nil or result == nil then
-      return
-   end
-   if not vim.api.nvim_buf_get_option(bufnr, "modified") then
-      local view = vim.fn.winsaveview()
-      vim.lsp.util.apply_text_edits(result, bufnr)
-      vim.fn.winrestview(view)
-      if bufnr == vim.api.nvim_get_current_buf() then
-         vim.api.nvim_command("noautocmd :update")
-      end
-   end
 end
 
 sign_define('LspDiagnosticsSignWarning', {text='⚡'})
@@ -114,5 +100,25 @@ lspconfig.rust_analyzer.setup{
 }
 
 lspconfig.efm.setup{
-   on_attach = on_attach
+   on_attach = on_attach,
+   init_options = {
+      documentFormatting = true
+   },
+   settings = {
+      rootMarkers = {".git/"},
+      languages = {
+         java = {
+            {formatCommand = "prettier --parser java"}
+         },
+         javascript = {
+            {formatCommand = "standard --fix --stdin", formatStdin = true}
+         },
+         json = {
+            {formatCommand = "prettier --parser json"}
+         },
+         yaml = {
+            {formatCommand = "prettier --parser yaml"}
+         }
+      }
+   }
 }
