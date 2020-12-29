@@ -110,16 +110,16 @@ lspconfig.efm.setup{
       rootMarkers = {".git/"},
       languages = {
          java = {
-            {formatCommand = "prettier --parser java"}
+            {formatCommand = "prettier --parser java", formatStdin = true}
          },
          javascript = {
             {formatCommand = "standard --fix --stdin", formatStdin = true}
          },
          json = {
-            {formatCommand = "prettier --parser json"}
+            {formatCommand = "prettier --parser json", formatStdin = true}
          },
          yaml = {
-            {formatCommand = "prettier --parser yaml"}
+            {formatCommand = "prettier --parser yaml", formatStdin = true}
          }
       }
    }
