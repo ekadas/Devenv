@@ -125,13 +125,13 @@ let python_highlight_all=1
 " rust
 let g:rustfmt_autosave = 1
 
-" lsp
-lua require('lsp')
-
 " completion
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 imap <silent> <s-tab> <Plug>(completion_trigger)
 set completeopt=menuone,noinsert,noselect
+
+" lsp
+lua require('lsp')
 
 " Nerdtree
 map <C-n> :NERDTreeToggle<CR>
