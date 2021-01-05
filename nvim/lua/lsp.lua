@@ -124,3 +124,7 @@ lspconfig.efm.setup{
       }
    }
 }
+
+lspconfig.cssls.setup{
+   on_attach = on_attach
+}

@@ -15,4 +15,5 @@ npm install -g \
    typescript typescript-language-server \
    vscode-json-languageserver \
    yaml-language-server \
-   elm elm-test elm-format @elm-tooling/elm-language-server
+   elm elm-test elm-format @elm-tooling/elm-language-server \
+   vscode-css-languageserver-bin
