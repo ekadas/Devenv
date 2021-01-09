@@ -32,21 +32,12 @@ Plug 'neomake/neomake'
 " Nerdtree
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
-" Python
-Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
-
 " javascript
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'maxmellon/vim-jsx-pretty', { 'for': 'javascript' }
 
-" typescript
-Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-
 " html
 Plug 'vim-scripts/HTML-AutoCloseTag', { 'for': 'html' }
-
-" elm
-Plug 'andys8/vim-elm-syntax', { 'for': 'elm' }
 
 " rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
