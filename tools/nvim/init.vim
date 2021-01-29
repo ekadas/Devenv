@@ -47,8 +47,12 @@ Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
 
-let g:python_host_prog = expand('$HOME') . '/.pyenv/versions/nvim2/bin/python'
-let g:python3_host_prog = expand('$HOME') . '/.pyenv/versions/nvim3/bin/python'
+" disable providers
+let g:loaded_python_provider = 0
+let g:loaded_python3_provider = 0
+let g:loaded_ruby_provider = 0
+let g:loaded_perl_provider = 0
+let g:loaded_node_provider = 0
 
 " line numbers
 set number

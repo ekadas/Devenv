@@ -8,7 +8,7 @@ fi
 curl --silent -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim > /dev/null
 # link config
 mkdir -p ~/.config
-ln -sf $BASEDIR/nvim ~/.config/nvim
+ln -sf $BASEDIR/tools/nvim ~/.config/nvim
 
 # install fzf dependency
 if ! command -v fd &> /dev/null ; then

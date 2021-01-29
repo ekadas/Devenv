@@ -1,7 +1,5 @@
 #!/bin/bash
 
-PYTHON3=3.8.0
-
 BASEDIR="$( cd "$(dirname "$0")" ; pwd -P )"
 OS=$(uname -s)
 
@@ -25,41 +23,8 @@ confirm () {
    fi
 }
 
-if [ "$OS" = "Darwin" ]; then
-   confirm "brew" brew/install.sh
-fi
-
-if [ "$OS" = "Darwin" ]; then
-   confirm "iterm2" iterm2/install.sh
-fi
-
-confirm "python" python/install.sh
-
-confirm "bash" bash/install.sh
-source ~/.bash_profile
-
-confirm "tmux" tmux/install.sh
-
-confirm "git" git/install.sh
-
-confirm "nvm" nvm/install.sh
-
-confirm "neovim" nvim/install.sh
-
-confirm "rbenv" rbenv/install.sh
-
-confirm "rust" rust/install.sh
-
-if [ "$OS" = "Darwin" ]; then
-   confirm "docker" docker/install.sh
-fi
-
-if [ "$OS" = "Darwin" ]; then
-   confirm "awscli" awscli/install.sh
-fi
-
-if [ "$OS" = "Darwin" ]; then
-   confirm "kubectl" kubectl/install.sh
-fi
-
-unset PYENV_VERSION
+for dir in tools/*/ ; do
+   path=${dir%*/}
+   tool=${path##*/}
+   confirm "$tool" $path/install.sh
+done

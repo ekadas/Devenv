@@ -28,7 +28,7 @@ alias l='ls -CF'
 
 alias tmux="TERM=screen-256color-bce tmux"
 
-PATH=$PATH:~/Devenv/scripts:~/.pyenv/bin:~/.rbenv/bin:~/.cargo/bin:~/go/bin
+PATH=$PATH:~/Devenv/scripts:~/.pyenv/bin::~/.cargo/bin
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_COMMAND='fd --type f'
