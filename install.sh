@@ -20,6 +20,7 @@ confirm () {
    if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
       pconfiguring $1
       source $2
+      pprint "→ Done\n"
    fi
 }
 
