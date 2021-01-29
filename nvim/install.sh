@@ -19,20 +19,4 @@ if ! command -v fd &> /dev/null ; then
    fi
 fi
 
-# install formatter
-## requires go
-if ! command -v go &> /dev/null ; then
-   source go/install.sh
-fi
-go get github.com/mattn/efm-langserver
-
-npm install -g \
-   prettier \
-   prettier-plugin-java \
-   standard \
-   typescript typescript-language-server \
-   vscode-json-languageserver \
-   yaml-language-server \
-   elm elm-test elm-format @elm-tooling/elm-language-server \
-   vscode-css-languageserver-bin \
-   bash-language-server
+source $BASEDIR/scripts/update-lsp
