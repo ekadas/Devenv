@@ -1,11 +1,14 @@
 #!/bin/bash
 set -e
 
+os=$(uname -s)
 # this script installs or updates lsp servers and their dependencies
 
 # install formatter
-if [ "$OS" = "Darwin" ]; then
+if [ "$os" = "Darwin" ]; then
    brew install efm-langserver
+else
+   sudo pacman -S efm-langserver
 fi
 
 npm install -g \
