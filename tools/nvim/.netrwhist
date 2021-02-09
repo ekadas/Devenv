@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =2
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/Users/endrek/Devenv'
 let g:netrw_dirhist_2='/Users/endrek/Devenv/awscli'
 let g:netrw_dirhist_1='/Users/endrek/Code/shielding.notification'
 let g:netrw_dirhist_0='/Users/endrek/Code/ndp.empi/.github/workflows'
@@ -9,4 +10,3 @@ let g:netrw_dirhist_7='/usr/local/Cellar/neovim/HEAD-ea8756f'
 let g:netrw_dirhist_6='/usr/local/Cellar/neovim'
 let g:netrw_dirhist_5='/Users/endrek/Code/ndp.kubernetes'
 let g:netrw_dirhist_4='/Users/endrek/Code/ndp.authentication-provider'
-let g:netrw_dirhist_3='/Users/endrek/Code/ndp.authentication-provider/.github/actions/load-config'

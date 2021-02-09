@@ -45,6 +45,9 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 " editorconfig
 Plug 'editorconfig/editorconfig-vim'
 
+" jsonnet
+Plug 'google/vim-jsonnet'
+
 call plug#end()
 
 " disable providers
