@@ -44,6 +44,7 @@ lspconfig.yamlls.setup{
          },
          customTags = {
             "!And scalar", "!And mapping", "!And sequence",
+            "!Base64 scalar", "!Base64 mapping", "!Base64 sequence",
             "!If scalar", "!If mapping", "!If sequence",
             "!Not scalar", "!Not mapping", "!Not sequence",
             "!Equals scalar", "!Equals mapping", "!Equals sequence",
@@ -110,7 +111,7 @@ lspconfig.efm.setup{
       rootMarkers = {".git/"},
       languages = {
          java = {
-            {formatCommand = "prettier --parser java", formatStdin = true}
+            {formatCommand = "prettier --parser java --tab-width 4 --print-width 120", formatStdin = true}
          },
          javascript = {
             {formatCommand = "standard --fix --stdin", formatStdin = true}
@@ -119,7 +120,10 @@ lspconfig.efm.setup{
             {formatCommand = "prettier --parser json", formatStdin = true}
          },
          yaml = {
-            {formatCommand = "prettier --parser yaml", formatStdin = true}
+            {formatCommand = "prettier --parser yaml --print-width 120", formatStdin = true}
+         },
+         markdown = {
+            {formatCommand = "prettier --parser markdown --print-width 120", formatStdin = true}
          }
       }
    }
