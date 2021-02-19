@@ -32,7 +32,10 @@ lspconfig.bashls.setup{
 }
 
 lspconfig.yamlls.setup{
-   on_attach = on_attach,
+   on_attach = function(client)
+      client.resolved_capabilities.document_formatting = false
+      on_attach(client)
+   end,
    settings = {
       yaml = {
          schemas = {
@@ -102,30 +105,36 @@ lspconfig.rust_analyzer.setup{
    }
 }
 
+local prettier = {
+   formatCommand = "prettier --stdin-filepath ${INPUT}",
+   formatStdin = true
+}
+local efm_languages = {
+   javascript = {
+      {formatCommand = "standard --fix --stdin", formatStdin = true}
+   },
+   java = {
+      prettier
+   },
+   json = {
+      prettier
+   },
+   yaml = {
+      prettier
+   },
+   markdown = {
+      prettier
+   }
+}
 lspconfig.efm.setup{
    on_attach = on_attach,
+   filetypes = vim.tbl_keys(efm_languages),
    init_options = {
       documentFormatting = true
    },
    settings = {
       rootMarkers = {".git/"},
-      languages = {
-         java = {
-            {formatCommand = "prettier --parser java --tab-width 4 --print-width 120", formatStdin = true}
-         },
-         javascript = {
-            {formatCommand = "standard --fix --stdin", formatStdin = true}
-         },
-         json = {
-            {formatCommand = "prettier --parser json", formatStdin = true}
-         },
-         yaml = {
-            {formatCommand = "prettier --parser yaml --print-width 120", formatStdin = true}
-         },
-         markdown = {
-            {formatCommand = "prettier --parser markdown --print-width 120", formatStdin = true}
-         }
-      }
+      languages = efm_languages
    }
 }
 
