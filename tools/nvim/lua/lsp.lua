@@ -1,6 +1,11 @@
 local lspconfig = require'lspconfig'
 local completion = require'completion'
+
 local sign_define = vim.fn.sign_define
+sign_define('LspDiagnosticsSignWarning', {text='⚡'})
+sign_define('LspDiagnosticsSignHint', {text='💡'})
+sign_define('LspDiagnosticsSignInformation', {text='❕'})
+sign_define('LspDiagnosticsSignError', {text='🩸'})
 
 local on_attach = function(client)
    if client.resolved_capabilities.document_formatting then
@@ -17,11 +22,6 @@ local on_attach = function(client)
 
    completion.on_attach(client)
 end
-
-sign_define('LspDiagnosticsSignWarning', {text='⚡'})
-sign_define('LspDiagnosticsSignHint', {text='💡'})
-sign_define('LspDiagnosticsSignInformation', {text='❕'})
-sign_define('LspDiagnosticsSignError', {text='🩸'})
 
 lspconfig.elmls.setup{
    on_attach = on_attach
@@ -140,4 +140,26 @@ lspconfig.efm.setup{
 
 lspconfig.cssls.setup{
    on_attach = on_attach
+}
+
+lspconfig.sumneko_lua.setup {
+   on_attach = on_attach,
+   cmd = {"lua-langserver"},
+   settings = {
+      Lua = {
+         runtime = {
+            version = 'LuaJIT',
+            path = vim.split(package.path, ';'),
+         },
+         diagnostics = {
+            globals = {'vim'},
+         },
+         workspace = {
+            library = {
+               [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+               [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+            },
+         },
+      },
+   },
 }

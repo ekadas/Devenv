@@ -2,6 +2,8 @@
 
 if [ "$OS" = "Darwin" ]; then
    brew install --HEAD neovim
+else
+   yaourt -S neovim-nightly-bin
 fi
 
 # install vim-plug
@@ -19,4 +21,4 @@ if ! command -v fd &> /dev/null ; then
    fi
 fi
 
-source $BASEDIR/scripts/update-lsp
+source $BASEDIR/scripts/update-lsp $BASEDIR

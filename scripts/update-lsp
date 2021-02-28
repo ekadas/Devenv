@@ -1,7 +1,11 @@
 #!/bin/bash
-set -euo pipefail
 
-source "$(dirname "$0")/../util.sh"
+if [ $# -eq 0 ]; then
+   basedir="$(dirname "$0")/.."
+else
+   basedir="$1"
+fi
+source "$basedir/util.sh"
 
 os=$(uname -s)
 # this script installs or updates lsp servers and their dependencies
@@ -20,6 +24,16 @@ if [ "$os" = "Darwin" ]; then
    brew install efm-langserver
 else
    sudo pacman -S efm-langserver
+fi
+
+pprint lua-language-server
+if [ "$os" = "Darwin" ]; then
+   brew install saadparwaiz1/personal/lua-language-server
+else
+   yaourt -S lua-language-server
+   if [ -f "/bin/lua-language-server" ] ; then
+      sudo mv /bin/lua-language-server /bin/lua-langserver
+   fi
 fi
 
 npm_install prettier
