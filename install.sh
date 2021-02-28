@@ -1,18 +1,13 @@
 #!/bin/bash
+set -euo pipefail
+
+source "$(dirname "$0")/util.sh"
 
 BASEDIR="$( cd "$(dirname "$0")" ; pwd -P )"
 OS=$(uname -s)
 
-# colors
-RED='\033[0;32m'
-NC='\033[0m'
-
-pprint () {
-   echo -e "$RED$1$NC"
-}
-
 pconfiguring () {
-   pprint "\n→ Configuring $1"
+   print_green "\n→ Configuring $1"
 }
 
 confirm () {
@@ -20,7 +15,7 @@ confirm () {
    if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
       pconfiguring $1
       source $2
-      pprint "→ Done\n"
+      print_green "→ Done\n"
    fi
 }
 

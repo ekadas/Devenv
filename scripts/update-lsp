@@ -1,23 +1,45 @@
 #!/bin/bash
-set -e
+set -euo pipefail
+
+source "$(dirname "$0")/../util.sh"
 
 os=$(uname -s)
 # this script installs or updates lsp servers and their dependencies
 
-# install formatter
+pprint () {
+   print_green "\n→ $1"
+}
+
+npm_install () {
+   pprint $1
+   npm install -g $1
+}
+
+pprint efm-langserver
 if [ "$os" = "Darwin" ]; then
    brew install efm-langserver
 else
    sudo pacman -S efm-langserver
 fi
 
-npm install -g \
-   prettier \
-   prettier-plugin-java \
-   standard \
-   typescript typescript-language-server \
-   vscode-json-languageserver \
-   yaml-language-server \
-   elm elm-test elm-format @elm-tooling/elm-language-server \
-   vscode-css-languageserver-bin \
-   bash-language-server
+npm_install prettier
+
+npm_install prettier-plugin-java
+
+npm_install standard
+
+npm_install typescript
+npm_install typescript-language-server
+
+npm_install vscode-json-languageserver
+
+npm_install yaml-language-server
+
+npm_install elm
+npm_install elm-test
+npm_install elm-format
+npm_install @elm-tooling/elm-language-server
+
+npm_install vscode-css-languageserver-bin
+
+npm_install bash-language-server
