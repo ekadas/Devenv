@@ -105,25 +105,28 @@ lspconfig.rust_analyzer.setup{
    }
 }
 
-local prettier = {
-   formatCommand = "prettier --stdin-filepath ${INPUT}",
-   formatStdin = true
-}
+local prettier = function(parameters)
+   parameters = parameters or ""
+   return {
+      formatCommand = "prettier --stdin-filepath ${INPUT} " .. parameters,
+      formatStdin = true
+   }
+end
 local efm_languages = {
    javascript = {
       {formatCommand = "standard --fix --stdin", formatStdin = true}
    },
    java = {
-      prettier
+      prettier()
    },
    json = {
-      prettier
+      prettier()
    },
    yaml = {
-      prettier
+      prettier("--single-quote")
    },
    markdown = {
-      prettier
+      prettier()
    }
 }
 lspconfig.efm.setup{
