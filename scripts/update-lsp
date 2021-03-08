@@ -10,11 +10,11 @@ source "$basedir/util.sh"
 os=$(uname -s)
 # this script installs or updates lsp servers and their dependencies
 
-pprint () {
+pprint() {
    print_green "\n→ $1"
 }
 
-npm_install () {
+npm_install() {
    pprint $1
    npm install -g $1
 }
@@ -31,9 +31,16 @@ if [ "$os" = "Darwin" ]; then
    brew install saadparwaiz1/personal/lua-language-server
 else
    yaourt -S lua-language-server
-   if [ -f "/bin/lua-language-server" ] ; then
+   if [ -f "/bin/lua-language-server" ]; then
       sudo mv /bin/lua-language-server /bin/lua-langserver
    fi
+fi
+
+pprint shfmt
+if [ "$os" = "Darwin" ]; then
+   brew install shfmt
+else
+   sudo pacman -S shfmt
 fi
 
 npm_install prettier

@@ -114,7 +114,10 @@ local prettier = function(parameters)
 end
 local efm_languages = {
    javascript = {
-      {formatCommand = "standard --fix --stdin", formatStdin = true}
+      {
+         formatCommand = "standard --fix --stdin",
+         formatStdin = true
+      }
    },
    java = {
       prettier()
@@ -127,6 +130,12 @@ local efm_languages = {
    },
    markdown = {
       prettier()
+   },
+   sh = {
+      {
+         formatCommand = "shfmt -filename ${INPUT}",
+         formatStdin = true
+      }
    }
 }
 lspconfig.efm.setup{
