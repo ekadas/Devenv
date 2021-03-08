@@ -95,7 +95,6 @@ colorscheme srcery
 
 " neomake
 let g:neomake_open_list=2
-autocmd! BufWritePost *.java Neomake
 
 " more responsive timeout
 set ttimeoutlen=50
@@ -123,10 +122,19 @@ let python_highlight_all=1
 " rust
 let g:rustfmt_autosave = 1
 
+" java
+autocmd BufEnter *.java lua require'completion'.on_attach()
+autocmd! BufWritePost *.java Neomake
+
 " completion
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 imap <silent> <s-tab> <Plug>(completion_trigger)
 set completeopt=menuone,noinsert,noselect
+let g:completion_chain_complete_list = [
+    \{'complete_items': ['lsp']},
+    \{'mode': '<c-p>'}
+\]
+let g:completion_auto_change_source = 1
 
 " lsp
 lua require('lsp')
