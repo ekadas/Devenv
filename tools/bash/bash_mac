@@ -6,7 +6,8 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
    . $(brew --prefix)/etc/bash_completion
 fi
 
-export JAVA_HOME='/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home'
+eval "$(jenv init -)"
+export PATH="$HOME/.jenv/bin:$PATH"
 
 source <(kubectl completion bash)
 export BASH_SILENCE_DEPRECATION_WARNING=1

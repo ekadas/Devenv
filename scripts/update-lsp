@@ -43,6 +43,28 @@ else
    sudo pacman -S shfmt
 fi
 
+pprint jdtls
+if [ "$os" = "Darwin" ]; then
+   jdtls_path=/usr/local/share/eclipse.jdt.ls
+
+   if [ -d "$jdtls_path" ]; then
+      (
+         cd $jdtls_path
+         git pp
+
+         ./mvnw package -DSkipTests
+      )
+   else
+      git clone git@github.com:eclipse/eclipse.jdt.ls.git $jdtls_path
+      (
+         cd $jdtls_path
+         ./mvnw clean verify
+      )
+   fi
+
+   cp $basedir/tools/java/jdtls /usr/local/bin/jdtls
+fi
+
 npm_install prettier
 
 npm_install prettier-plugin-java

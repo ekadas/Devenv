@@ -26,9 +26,6 @@ Plug 'tpope/vim-surround'
 " Colorscheme
 Plug 'srcery-colors/srcery-vim'
 
-" linting like behaviour
-Plug 'neomake/neomake'
-
 " Nerdtree
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
@@ -73,28 +70,23 @@ set pastetoggle=<F2>
 set hidden
 
 " remap copy paste
-vnoremap <leader>y "+y
-nnoremap <leader>y "+y
-vnoremap <leader>p "+p
-nnoremap <leader>p "+p
+noremap <leader>y "+y
+noremap <leader>p "+p
 
 " buffer shortcuts
-:noremap <C-l> :bnext<CR>
-:noremap <C-h> :bprevious<CR>
-:noremap <C-w> :bd<CR>
+noremap <C-l> :bnext<CR>
+noremap <C-h> :bprevious<CR>
+noremap <C-w> :bd<CR>
 
 " visually selected text search
-:vnoremap // y/<C-R>"<CR>
+vnoremap // y/<C-R>"<CR>
 
 " fzf configs
-:noremap <C-p> :FZF<CR>
+noremap <C-p> :FZF<CR>
 let g:fzf_layout = { 'down': '~20%' }
 
 " colors
 colorscheme srcery
-
-" neomake
-let g:neomake_open_list=2
 
 " more responsive timeout
 set ttimeoutlen=50
@@ -121,10 +113,6 @@ let python_highlight_all=1
 
 " rust
 let g:rustfmt_autosave = 1
-
-" java
-autocmd BufEnter *.java lua require'completion'.on_attach()
-autocmd! BufWritePost *.java Neomake
 
 " completion
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"

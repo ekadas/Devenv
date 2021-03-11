@@ -175,3 +175,8 @@ lspconfig.sumneko_lua.setup {
       },
    },
 }
+
+lspconfig.jdtls.setup {
+   on_attach = on_attach,
+   cmd = {"jdtls"}
+}
