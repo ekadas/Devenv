@@ -131,6 +131,9 @@ local efm_languages = {
    markdown = {
       prettier()
    },
+   html = {
+      prettier()
+   },
    sh = {
       {
          formatCommand = "shfmt -filename ${INPUT}",
