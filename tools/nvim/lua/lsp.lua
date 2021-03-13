@@ -24,7 +24,18 @@ local on_attach = function(client)
 end
 
 lspconfig.elmls.setup{
-   on_attach = on_attach
+   on_attach = function(client)
+      if client.config.flags then
+         client.config.flags.allow_incremental_sync = true
+      end
+
+      on_attach(client)
+   end,
+   settings = {
+      elmLS = {
+         onlyUpdateDiagnosticsOnSave = true
+      }
+   }
 }
 
 lspconfig.bashls.setup{
