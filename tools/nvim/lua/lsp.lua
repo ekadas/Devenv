@@ -17,6 +17,7 @@ local on_attach = function(client)
    vim.api.nvim_buf_set_keymap(0, 'n', '<space>', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', {noremap = true})
    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>r', '<cmd>lua vim.lsp.buf.rename()<CR>', {noremap = true})
    vim.api.nvim_buf_set_keymap(0, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', {noremap = true})
+   vim.api.nvim_buf_set_keymap(0, 'n', 'ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', {noremap = true})
 
    vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -138,9 +139,6 @@ local efm_languages = {
    },
    yaml = {
       prettier("--single-quote")
-   },
-   markdown = {
-      prettier()
    },
    html = {
       prettier()
