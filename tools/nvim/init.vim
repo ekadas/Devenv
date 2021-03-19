@@ -45,6 +45,9 @@ Plug 'editorconfig/editorconfig-vim'
 " jsonnet
 Plug 'google/vim-jsonnet'
 
+" color highligher
+Plug 'norcalli/nvim-colorizer.lua'
+
 call plug#end()
 
 " disable providers
@@ -86,6 +89,8 @@ noremap <C-p> :FZF<CR>
 let g:fzf_layout = { 'down': '~20%' }
 
 " colors
+set t_Co=256
+set termguicolors
 colorscheme srcery
 
 " more responsive timeout
@@ -95,9 +100,6 @@ set ttimeoutlen=50
 set showtabline=2
 set noshowmode
 set laststatus=2
-if !has('gui_running')
-  set t_Co=256
-endif
 function! LightlineFilename()
   let root = fnamemodify(get(b:, 'git_dir'), ':h')
   let path = expand('%:p')
@@ -126,6 +128,9 @@ let g:completion_auto_change_source = 1
 
 " lsp
 lua require('lsp')
+
+" colorize
+lua require'colorizer'.setup()
 
 " Nerdtree
 map <C-n> :NERDTreeToggle<CR>
