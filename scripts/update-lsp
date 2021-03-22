@@ -65,6 +65,13 @@ if [ "$os" = "Darwin" ]; then
    cp $basedir/tools/java/jdtls /usr/local/bin/jdtls
 fi
 
+pprint rust-analyzer
+if [ "$os" = "Darwin" ]; then
+   brew install rust-analyzer
+else
+   sudo pacman -S rust-analyzer
+fi
+
 npm_install prettier
 
 npm_install prettier-plugin-java

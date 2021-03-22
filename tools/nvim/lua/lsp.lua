@@ -107,14 +107,6 @@ lspconfig.tsserver.setup{
 
 lspconfig.rust_analyzer.setup{
    on_attach = on_attach,
-   settings = {
-      ['rust-analyzer'] = {
-         checkOnSave = {
-            enable = true,
-            command = 'clippy'
-         }
-      }
-   }
 }
 
 local prettier = function(parameters)
