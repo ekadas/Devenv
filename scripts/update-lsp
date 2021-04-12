@@ -5,6 +5,7 @@ if [ $# -eq 0 ]; then
 else
    basedir="$1"
 fi
+# shellcheck source=util.sh
 source "$basedir/util.sh"
 
 os=$(uname -s)
@@ -15,8 +16,8 @@ pprint() {
 }
 
 npm_install() {
-   pprint $1
-   npm install -g $1
+   pprint "$1"
+   npm install -g "$1"
 }
 
 pprint efm-langserver
@@ -36,11 +37,11 @@ else
    fi
 fi
 
-pprint shfmt
+pprint "shfmt & shellcheck"
 if [ "$os" = "Darwin" ]; then
-   brew install shfmt
+   brew install shfmt shellcheck
 else
-   sudo pacman -S shfmt
+   sudo pacman -S shfmt shellcheck
 fi
 
 pprint jdtls
@@ -49,7 +50,7 @@ if [ "$os" = "Darwin" ]; then
 
    if [ -d "$jdtls_path" ]; then
       (
-         cd $jdtls_path
+         cd $jdtls_path || return
          git pp
 
          ./mvnw package -DSkipTests
@@ -57,12 +58,12 @@ if [ "$os" = "Darwin" ]; then
    else
       git clone git@github.com:eclipse/eclipse.jdt.ls.git $jdtls_path
       (
-         cd $jdtls_path
+         cd $jdtls_path || return
          ./mvnw clean verify
       )
    fi
 
-   cp $basedir/tools/java/jdtls /usr/local/bin/jdtls
+   cp "$basedir/tools/java/jdtls" /usr/local/bin/jdtls
 fi
 
 pprint rust-analyzer
@@ -93,3 +94,29 @@ npm_install @elm-tooling/elm-language-server
 npm_install vscode-css-languageserver-bin
 
 npm_install bash-language-server
+
+pprint hadolint
+if [ "$os" = "Darwin" ]; then
+   brew install hadolint
+else
+   yaourt -S hadolint
+fi
+
+npm_install dockerfilelint
+
+npm_install markdownlint
+npm_install markdownlint-cli
+cp "$basedir/tools/nvim/markdownlintrc" ~/.markdownlintrc
+
+pprint yamllint
+pip install --user yamllint
+
+pprint yamllint
+pip install --user cfn-lint
+
+pprint kubeval
+if [ "$os" = "Darwin" ]; then
+   brew install instrumenta/instrumenta/kubeval
+else
+   yaourt -S kubeval
+fi

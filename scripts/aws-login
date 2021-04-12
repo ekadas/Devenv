@@ -2,7 +2,7 @@
 
 # This script generates AWS Programmatic Access credentials from a user authenticated via SSO
 
-if [ -z "$AWS_PROFILE"  ] ; then
+if [ -z "$AWS_PROFILE" ]; then
    echo "Missing profile, export AWS_PROFILE="
    exit 1
 fi
@@ -11,24 +11,24 @@ aws sso login --profile "$AWS_PROFILE"
 
 user_name=$(git config user.name | sed 's/[^A-Za-z0-9+=,.@-]/-/g')
 role_arn="$(
-    aws iam list-roles \
-       --profile $AWS_PROFILE \
-       --path-prefix /aws-reserved/sso.amazonaws.com/eu-west-2 \
-       | jq -r '.Roles | .[] | select(.Arn | contains("NDSEngineeringAccess")) | .Arn'
+   aws iam list-roles \
+      --profile "$AWS_PROFILE" \
+      --path-prefix /aws-reserved/sso.amazonaws.com/eu-west-2 |
+      jq -r '.Roles | .[] | select(.Arn | contains("NDSEngineeringAccess")) | .Arn'
 )"
 request_credentials() {
-  credentials=$(
-    aws sts assume-role \
-      --profile $AWS_PROFILE \
-      --role-arn $role_arn \
-      --role-session-name $user_name
-  )
+   credentials=$(
+      aws sts assume-role \
+         --profile "$AWS_PROFILE" \
+         --role-arn "$role_arn" \
+         --role-session-name "$user_name"
+   )
 }
 request_credentials
 
-access_key_id=$(echo $credentials | perl -n -e'/"AccessKeyId": "([^,]+)"/ && print $1')
-secret_key_id=$(echo $credentials | perl -n -e'/"SecretAccessKey": "([^,]+)"/ && print $1')
-session_token=$(echo $credentials | perl -n -e'/"SessionToken": "([^,]+)"/ && print $1')
+access_key_id=$(echo "$credentials" | perl -n -e'/"AccessKeyId": "([^,]+)"/ && print $1')
+secret_key_id=$(echo "$credentials" | perl -n -e'/"SecretAccessKey": "([^,]+)"/ && print $1')
+session_token=$(echo "$credentials" | perl -n -e'/"SessionToken": "([^,]+)"/ && print $1')
 
 aws configure set --profile "$AWS_PROFILE" aws_access_key_id "$access_key_id"
 aws configure set --profile "$AWS_PROFILE" aws_secret_access_key "$secret_key_id"

@@ -6,7 +6,7 @@ else
    sudo pacman -S tmux
 fi
 
-ln -sf $BASEDIR/tools/tmux/tmux.conf ~/.tmux.conf
+ln -sf "$BASEDIR/tools/tmux/tmux.conf" ~/.tmux.conf
 
 tmux_plugins_path=~/.tmux/plugins
 

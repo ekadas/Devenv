@@ -1,3 +1,4 @@
 nvim/nvim
 */**/.netrwhist
 .DS_Store
+super-linter.log

@@ -130,7 +130,14 @@ local efm_languages = {
       prettier()
    },
    yaml = {
-      prettier("--single-quote")
+      prettier("--single-quote"),
+      {
+         lintCommand = "yamllint -f parsable -",
+         lintStdin = true,
+         lintFormats = {
+            "%f:%l %m"
+         }
+      }
    },
    html = {
       prettier()
@@ -138,7 +145,26 @@ local efm_languages = {
    sh = {
       {
          formatCommand = "shfmt -filename ${INPUT}",
-         formatStdin = true
+         formatStdin = true,
+         lintCommand = "shellcheck -f gcc -x",
+         lintSource = "shellcheck"
+      }
+   },
+   dockerfile = {
+      {
+         lintCommand = "hadolint",
+         lintFormats = {
+            "%f:%l %m"
+         }
+      }
+   },
+   markdown = {
+      {
+         lintCommand = "markdownlint -s -c ${HOME}/.markdownlintrc",
+         lintStdin = true,
+         lintFormats = {
+            "%f:%l %m"
+         }
       }
    }
 }

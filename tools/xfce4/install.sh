@@ -6,5 +6,5 @@ else
    config_path=~/.config/xfce4/terminal
    mkdir -p $config_path
    rm $config_path/terminalrc
-   ln -sf $BASEDIR/tools/xfce4/terminalrc $config_path/terminalrc
+   ln -sf "$BASEDIR/tools/xfce4/terminalrc" "$config_path/terminalrc"
 fi

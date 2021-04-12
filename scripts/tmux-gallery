@@ -1,7 +1,7 @@
 #!/bin/sh
 
-BASE="$HOME/Code/deploy"
-cd $BASE
+base="$HOME/Code/deploy"
+cd "$base" || return
 
 tmux new-session -d -s gallery -n ui
 tmux new-window -t gallery:2 -n backend
@@ -10,12 +10,12 @@ tmux new-window -t gallery:4 -n ui-bash
 tmux new-window -t gallery:5 -n backend-nvim
 tmux new-window -t gallery:6 -n backend-bash
 
-tmux send-keys -t gallery:1 "cd $BASE/deploy-gallery-frontend; npm start" C-m
-tmux send-keys -t gallery:2 "cd $BASE/deploy-gallery-backend; ./run-dev.sh" C-m
-tmux send-keys -t gallery:3 "cd $BASE/deploy-gallery-frontend; cd src/; nvim" C-m
-tmux send-keys -t gallery:4 "cd $BASE/deploy-gallery-frontend" C-m
-tmux send-keys -t gallery:5 "cd $BASE/deploy-gallery-backend; nvim" C-m
-tmux send-keys -t gallery:6 "cd $BASE/deploy-gallery-backend" C-m
+tmux send-keys -t gallery:1 "cd $base/deploy-gallery-frontend; npm start" C-m
+tmux send-keys -t gallery:2 "cd $base/deploy-gallery-backend; ./run-dev.sh" C-m
+tmux send-keys -t gallery:3 "cd $base/deploy-gallery-frontend; cd src/; nvim" C-m
+tmux send-keys -t gallery:4 "cd $base/deploy-gallery-frontend" C-m
+tmux send-keys -t gallery:5 "cd $base/deploy-gallery-backend; nvim" C-m
+tmux send-keys -t gallery:6 "cd $base/deploy-gallery-backend" C-m
 
 tmux select-window -t gallery:3
 tmux attach-session -t gallery

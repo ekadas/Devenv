@@ -6,7 +6,7 @@ jar=$jdtls_build_path/plugins/org.eclipse.equinox.launcher_1.6.100.v20201223-082
 config=$jdtls_build_path/config_mac
 workspace=$HOME/.local/share/jdtls
 
-mkdir -p $workspace
+mkdir -p "$workspace"
 
 /usr/local/opt/openjdk@11/bin/java \
 	-Declipse.application=org.eclipse.jdt.ls.core.id1 \

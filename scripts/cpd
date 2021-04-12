@@ -4,9 +4,9 @@ set -e
 FROM=$1
 TO=$2
 
-cp -R $FROM $TO
-rm -rf $TO/__snapshots__
-cd $TO
-rename "s/${FROM}/${TO}/" *
+cp -R "$FROM" "$TO"
+rm -rf "$TO/__snapshots__"
+cd "$TO"
+rename "s/${FROM}/${TO}/" ./*
 
 sed -i '' -- "s/${FROM}/${TO}/g" *
