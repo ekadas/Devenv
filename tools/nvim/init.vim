@@ -17,6 +17,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 
+" treesitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 " quick commenting
 Plug 'scrooloose/nerdcommenter'
 
@@ -125,6 +128,9 @@ let g:completion_auto_change_source = 1
 
 " lsp
 lua require('lsp')
+
+" treesitter
+lua require('treesitter')
 
 " colorize
 lua require'colorizer'.setup()
