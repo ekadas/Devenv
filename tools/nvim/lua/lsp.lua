@@ -207,6 +207,9 @@ lspconfig.sumneko_lua.setup {
 }
 
 lspconfig.jdtls.setup {
-   on_attach = on_attach,
+   on_attach = function(client)
+      client.resolved_capabilities.document_formatting = false
+      on_attach(client)
+   end,
    cmd = {"jdtls"}
 }
