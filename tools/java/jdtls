@@ -2,7 +2,7 @@
 
 jdtls_build_path=/usr/local/share/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository
 
-jar=$jdtls_build_path/plugins/org.eclipse.equinox.launcher_1.6.100.v20201223-0822.jar
+jar="$(find $jdtls_build_path/plugins -name "org.eclipse.equinox.launcher_1*")"
 config=$jdtls_build_path/config_mac
 workspace=$HOME/.local/share/jdtls
 
