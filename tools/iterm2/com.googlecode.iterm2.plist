@@ -273,6 +273,10 @@
 	<false/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
+	<key>NeverWarnAboutShortLivedSessions_998A5D75-15EB-4887-83FA-C85C060E4C1E</key>
+	<true/>
+	<key>NeverWarnAboutShortLivedSessions_998A5D75-15EB-4887-83FA-C85C060E4C1E_selection</key>
+	<integer>0</integer>
 	<key>NeverWarnAboutShortLivedSessions_BC2A2D3C-36CB-4EC7-AFE5-163D14B69B49</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_BC2A2D3C-36CB-4EC7-AFE5-163D14B69B49_selection</key>
@@ -1913,6 +1917,8 @@
 			<string>/Users/Endre</string>
 		</dict>
 	</array>
+	<key>OpenBookmark</key>
+	<false/>
 	<key>PMPrintingExpandedStateForPrint2</key>
 	<false/>
 	<key>PasteTabToStringTabStopSize</key>
