@@ -35,7 +35,7 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 
 [ -f ~/.k8s ] && . ~/.k8s
 
-eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 # eval "$(rbenv init -)"
 
