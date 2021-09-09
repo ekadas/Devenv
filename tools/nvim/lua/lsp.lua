@@ -44,19 +44,18 @@ lspconfig.bashls.setup{
 }
 
 lspconfig.yamlls.setup{
-   on_attach = function(client)
-      client.resolved_capabilities.document_formatting = false
-      on_attach(client)
-   end,
+   on_attach = on_attach,
    settings = {
       yaml = {
          schemas = {
-            ['https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json'] = 'cloudformation/*',
+            ['https://cfn-schema.y13i.com/schema?region=eu-west-2&version=latest'] = 'cloudformation/*',
             ['http://json.schemastore.org/github-workflow'] = '.github/workflows/*'
          },
-         schemaStore = {
-            enable = true
+         format = {
+            enable = false
          },
+         completion = true,
+         hover = true,
          customTags = {
             "!And scalar", "!And mapping", "!And sequence",
             "!Base64 scalar", "!Base64 mapping", "!Base64 sequence",
@@ -87,6 +86,12 @@ lspconfig.jsonls.setup{
    end,
    settings = {
       json = {
+         format = {
+            enable = false
+         },
+         schemaDownload = {
+            enable = true
+         },
          schemas = {
             {
                description = 'AWS IAM configuration',
@@ -181,6 +186,10 @@ lspconfig.efm.setup{
 }
 
 lspconfig.cssls.setup{
+   on_attach = on_attach
+}
+
+lspconfig.html.setup{
    on_attach = on_attach
 }
 

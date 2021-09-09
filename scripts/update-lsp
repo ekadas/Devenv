@@ -82,7 +82,8 @@ npm install -g standard
 npm install -g typescript
 npm install -g typescript-language-server
 
-npm_install vscode-json-languageserver
+pprint "json, html & css"
+npm install -g vscode-langservers-extracted
 
 npm_install yarn
 
@@ -95,8 +96,6 @@ npm install -g elm
 npm install -g elm-test
 npm install -g elm-format
 npm install -g @elm-tooling/elm-language-server
-
-npm_install vscode-css-languageserver-bin
 
 pprint docker
 npm install -g dockerfilelint
