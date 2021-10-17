@@ -15,3 +15,5 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 complete -C '/usr/local/bin/aws_completer' aws
 
 . <(eksctl completion bash)
+
+alias pip='pip3'
