@@ -2,7 +2,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " auto closes brackets
 Plug 'jiangmiao/auto-pairs'
-
 " status bar
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
@@ -72,8 +71,8 @@ set expandtab
 " F2 now toggles past mode
 set pastetoggle=<F2>
 
-" allows switching buffers without save
-set hidden
+" shows preview for substitute
+set inccommand=split
 
 " remap copy paste
 noremap <leader>y "+y

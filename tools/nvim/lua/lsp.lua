@@ -58,6 +58,7 @@ lspconfig.yamlls.setup{
          hover = true,
          customTags = {
             "!And scalar", "!And mapping", "!And sequence",
+            "!Condition scalar", "!Condition mapping", "!Condition sequence",
             "!Base64 scalar", "!Base64 mapping", "!Base64 sequence",
             "!If scalar", "!If mapping", "!If sequence",
             "!Not scalar", "!Not mapping", "!Not sequence",
