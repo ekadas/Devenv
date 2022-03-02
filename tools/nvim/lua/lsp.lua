@@ -48,7 +48,7 @@ lspconfig.yamlls.setup{
    settings = {
       yaml = {
          schemas = {
-            ['https://cfn-schema.y13i.com/schema?region=eu-west-2&version=latest'] = 'cloudformation/*',
+            ['https://cfn-schema.y13i.com/schema?region=eu-west-2&version=20.0.0'] = 'cloudformation/*',
             ['http://json.schemastore.org/github-workflow'] = '.github/workflows/*'
          },
          format = {
