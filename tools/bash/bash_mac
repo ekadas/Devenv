@@ -3,7 +3,7 @@ alias ls='ls -G'
 source ~/Devenv/tools/bash/bash_common
 
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
-   . $(brew --prefix)/etc/bash_completion
+	. $(brew --prefix)/etc/bash_completion
 fi
 
 eval "$(jenv init -)"
@@ -22,3 +22,5 @@ alias pip='pip3'
 NDSCTL_AC_BASH_SETUP_PATH=/Users/endrek/Library/Caches/@NES-Digital-Service/ndsctl/autocomplete/bash_setup && test -f $NDSCTL_AC_BASH_SETUP_PATH && source $NDSCTL_AC_BASH_SETUP_PATH
 
 [ -f /Users/endrek/Code/ndp.deployment-container/ndp-deployment-container.sh ] && source /Users/endrek/Code/ndp.deployment-container/ndp-deployment-container.sh
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
