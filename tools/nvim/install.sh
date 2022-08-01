@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$OS" = "Darwin" ]; then
-   brew install --HEAD neovim
+   brew install neovim
 else
    yaourt -S neovim-nightly-bin
 fi

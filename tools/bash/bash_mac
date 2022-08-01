@@ -2,8 +2,10 @@ alias ls='ls -G'
 
 source ~/Devenv/tools/bash/bash_common
 
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-	. $(brew --prefix)/etc/bash_completion
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+if [ -f $(brew --prefix)/etc/profile.d/bash_completion.sh ]; then
+	. $(brew --prefix)/etc/profile.d/bash_completion.sh
 fi
 
 eval "$(jenv init -)"
@@ -24,3 +26,5 @@ NDSCTL_AC_BASH_SETUP_PATH=/Users/endrek/Library/Caches/@NES-Digital-Service/ndsc
 [ -f /Users/endrek/Code/ndp.deployment-container/ndp-deployment-container.sh ] && source /Users/endrek/Code/ndp.deployment-container/ndp-deployment-container.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+alias assume="source assume"
