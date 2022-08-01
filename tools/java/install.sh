@@ -4,7 +4,7 @@ if [ "$OS" = "Darwin" ]; then
    brew install openjdk@11
 
    brew install jenv
-   jenv add /usr/local/opt/openjdk@11/libexec/openjdk.jdk/Contents/Home
+   jenv add "$(brew --prefix)/Cellar/openjdk@11/11.0.16/libexec/openjdk.jdk/Contents/Home"
 
-   jenv global 11
+   jenv global 11.0
 fi

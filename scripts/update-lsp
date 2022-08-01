@@ -115,7 +115,7 @@ pip install --user cfn-lint
 
 pprint kubeval
 if [ "$os" = "Darwin" ]; then
-   brew install instrumenta/instrumenta/kubeval
+   brew install kubeval
 else
    yaourt -S kubeval
 fi
