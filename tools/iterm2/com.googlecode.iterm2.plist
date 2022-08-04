@@ -9,7 +9,7 @@
 	<key>AllowClipboardAccess</key>
 	<true/>
 	<key>Command</key>
-	<string></string>
+	<string>/opt/homebrew/Cellar/bash/5.1.16/bin/bash</string>
 	<key>Custom Color Presets</key>
 	<dict>
 		<key>color</key>

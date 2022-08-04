@@ -9,7 +9,7 @@ sign_define('LspDiagnosticsSignError', {text='🩸'})
 
 local on_attach = function(client)
    if client.resolved_capabilities.document_formatting then
-      vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1500)]]
+      vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 3000)]]
    end
 
    vim.api.nvim_buf_set_keymap(0, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true})
@@ -126,6 +126,12 @@ local efm_languages = {
    javascript = {
       {
          formatCommand = "standard --fix --stdin",
+         formatStdin = true
+      }
+   },
+   typescript = {
+      {
+         formatCommand = "ts-standard --fix --stdin --stdin-filename ${INPUT}",
          formatStdin = true
       }
    },

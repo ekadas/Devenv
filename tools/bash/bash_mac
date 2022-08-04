@@ -1,3 +1,5 @@
+source /Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh
+
 alias ls='ls -G'
 
 source ~/Devenv/tools/bash/bash_common
@@ -21,7 +23,7 @@ complete -C '/usr/local/bin/aws_completer' aws
 alias pip='pip3'
 
 # ndsctl autocomplete setup
-NDSCTL_AC_BASH_SETUP_PATH=/Users/endrek/Library/Caches/@NES-Digital-Service/ndsctl/autocomplete/bash_setup && test -f $NDSCTL_AC_BASH_SETUP_PATH && source $NDSCTL_AC_BASH_SETUP_PATH
+eval $(ndsctl autocomplete:script bash)
 
 [ -f /Users/endrek/Code/ndp.deployment-container/ndp-deployment-container.sh ] && source /Users/endrek/Code/ndp.deployment-container/ndp-deployment-container.sh
 
