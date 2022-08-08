@@ -1,11 +1,10 @@
-local lspconfig = require'lspconfig'
-local completion = require'completion'
+local lspconfig = require('lspconfig')
 
-local sign_define = vim.fn.sign_define
-sign_define('LspDiagnosticsSignWarning', {text='⚡'})
-sign_define('LspDiagnosticsSignHint', {text='💡'})
-sign_define('LspDiagnosticsSignInformation', {text='❕'})
-sign_define('LspDiagnosticsSignError', {text='🩸'})
+local signs = { Error = '🩸', Warn = '⚡', Hint = '💡', Info = '❕' }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
 
 local on_attach = function(client)
    if client.resolved_capabilities.document_formatting then
@@ -20,11 +19,22 @@ local on_attach = function(client)
    vim.api.nvim_buf_set_keymap(0, 'n', 'ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', {noremap = true})
 
    vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-   completion.on_attach(client)
 end
 
-lspconfig.elmls.setup{
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+-- set up servers with default config
+local servers = { 'bashls', 'rust_analyzer', 'cssls', 'html' }
+for _, lsp in ipairs(servers) do
+   lspconfig[lsp].setup {
+      on_attach = on_attach,
+      capabilities = capabilities,
+   }
+end
+
+lspconfig.elmls.setup {
+   capabilities = capabilities,
    on_attach = function(client)
       if client.config.flags then
          client.config.flags.allow_incremental_sync = true
@@ -39,16 +49,13 @@ lspconfig.elmls.setup{
    }
 }
 
-lspconfig.bashls.setup{
-   on_attach = on_attach
-}
-
-lspconfig.yamlls.setup{
+lspconfig.yamlls.setup {
+   capabilities = capabilities,
    on_attach = on_attach,
    settings = {
       yaml = {
          schemas = {
-            ['https://cfn-schema.y13i.com/schema?region=eu-west-2&version=20.0.0'] = 'cloudformation/*',
+            ['https://cfn-schema.y13i.com/schema?region=eu-west-2&version=50.0.0'] = 'cloudformation/*',
             ['http://json.schemastore.org/github-workflow'] = '.github/workflows/*'
          },
          format = {
@@ -80,16 +87,14 @@ lspconfig.yamlls.setup{
    }
 }
 
-lspconfig.jsonls.setup{
+lspconfig.jsonls.setup {
+   capabilities = capabilities,
    on_attach = function(client)
       client.resolved_capabilities.document_formatting = false
       on_attach(client)
    end,
    settings = {
       json = {
-         format = {
-            enable = false
-         },
          schemaDownload = {
             enable = true
          },
@@ -104,103 +109,30 @@ lspconfig.jsonls.setup{
    }
 }
 
-lspconfig.tsserver.setup{
+lspconfig.tsserver.setup {
+   capabilities = capabilities,
    on_attach = function(client)
       client.resolved_capabilities.document_formatting = false
       on_attach(client)
    end
 }
 
-lspconfig.rust_analyzer.setup{
+local efm_config = require('efm')
+lspconfig.efm.setup {
+   capabilities = capabilities,
    on_attach = on_attach,
-}
-
-local prettier = function(parameters)
-   parameters = parameters or ""
-   return {
-      formatCommand = "prettier --stdin-filepath ${INPUT} " .. parameters,
-      formatStdin = true
-   }
-end
-local efm_languages = {
-   javascript = {
-      {
-         formatCommand = "standard --fix --stdin",
-         formatStdin = true
-      }
-   },
-   typescript = {
-      {
-         formatCommand = "ts-standard --fix --stdin --stdin-filename ${INPUT}",
-         formatStdin = true
-      }
-   },
-   java = {
-      prettier()
-   },
-   json = {
-      prettier()
-   },
-   yaml = {
-      prettier("--single-quote"),
-      {
-         lintCommand = "yamllint -f parsable -",
-         lintStdin = true,
-         lintFormats = {
-            "%f:%l %m"
-         }
-      }
-   },
-   html = {
-      prettier()
-   },
-   sh = {
-      {
-         formatCommand = "shfmt -filename ${INPUT}",
-         formatStdin = true,
-         lintCommand = "shellcheck -f gcc -x",
-         lintSource = "shellcheck"
-      }
-   },
-   dockerfile = {
-      {
-         lintCommand = "hadolint",
-         lintFormats = {
-            "%f:%l %m"
-         }
-      }
-   },
-   markdown = {
-      {
-         lintCommand = "markdownlint -s -c ${HOME}/.markdownlintrc",
-         lintStdin = true,
-         lintFormats = {
-            "%f:%l %m"
-         }
-      }
-   }
-}
-lspconfig.efm.setup{
-   on_attach = on_attach,
-   filetypes = vim.tbl_keys(efm_languages),
+   filetypes = vim.tbl_keys(efm_config),
    init_options = {
       documentFormatting = true
    },
    settings = {
       rootMarkers = {".git/"},
-      languages = efm_languages
+      languages = efm_config
    }
 }
 
-lspconfig.cssls.setup{
-   on_attach = on_attach
-}
-
-lspconfig.html.setup{
-   on_attach = on_attach
-}
-
 lspconfig.sumneko_lua.setup {
+   capabilities = capabilities,
    on_attach = on_attach,
    cmd = {"lua-langserver"},
    settings = {
@@ -223,6 +155,7 @@ lspconfig.sumneko_lua.setup {
 }
 
 lspconfig.jdtls.setup {
+   capabilities = capabilities,
    on_attach = function(client)
       client.resolved_capabilities.document_formatting = false
       on_attach(client)

@@ -2,6 +2,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " auto closes brackets
 Plug 'jiangmiao/auto-pairs'
+
 " status bar
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
@@ -12,15 +13,25 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " git
 Plug 'tpope/vim-fugitive'
 
+" snippets
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+
 " lsp
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
+
+" completion
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
 
 " treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " quick commenting
-Plug 'scrooloose/nerdcommenter'
+Plug 'numToStr/Comment.nvim'
 
 " surround
 Plug 'tpope/vim-surround'
@@ -54,22 +65,11 @@ call plug#end()
 
 " disable providers
 let g:loaded_python_provider = 0
-let g:loaded_python3_provider = 0
-let g:loaded_ruby_provider = 0
-let g:loaded_perl_provider = 0
 let g:loaded_node_provider = 0
 
 " line numbers
 set number
 set relativenumber
-
-" indentation
-set tabstop=3
-set shiftwidth=3
-set expandtab
-
-" F2 now toggles past mode
-set pastetoggle=<F2>
 
 " shows preview for substitute
 set inccommand=split
@@ -98,6 +98,9 @@ colorscheme srcery
 " more responsive timeout
 set ttimeoutlen=50
 
+" enable spell checking
+autocmd BufRead,BufNewFile *.md setlocal spell spelllang=en_uk
+
 " lightline
 set showtabline=2
 set noshowmode
@@ -112,27 +115,8 @@ function! LightlineFilename()
 endfunction
 lua require('lightline')
 
-" python
-let python_highlight_all=1
-
-" completion
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-imap <silent> <s-tab> <Plug>(completion_trigger)
-set completeopt=menuone,noinsert,noselect
-let g:completion_chain_complete_list = [
-    \{'complete_items': ['lsp']},
-    \{'mode': '<c-p>'}
-\]
-let g:completion_auto_change_source = 1
-
-" lsp
-lua require('lsp')
-
-" treesitter
-lua require('treesitter')
-
-" colorize
-lua require'colorizer'.setup()
+" set up lua plugins
+lua require('plugins')
 
 " Nerdtree
 map <C-n> :NERDTreeToggle<CR>
