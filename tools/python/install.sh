@@ -1,6 +1,6 @@
 #!/bin/bash
 
-python=3.8.0
+python=3.10.0
 
 if [ "$OS" = "Darwin" ]; then
    brew install pyenv-virtualenv >/dev/null

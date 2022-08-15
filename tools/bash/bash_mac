@@ -11,7 +11,6 @@ if [ -f $(brew --prefix)/etc/profile.d/bash_completion.sh ]; then
 fi
 
 eval "$(jenv init -)"
-export PATH="$HOME/.jenv/bin:$PATH"
 
 source <(kubectl completion bash)
 export BASH_SILENCE_DEPRECATION_WARNING=1
@@ -19,8 +18,6 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 complete -C '/usr/local/bin/aws_completer' aws
 
 . <(eksctl completion bash)
-
-alias pip='pip3'
 
 # ndsctl autocomplete setup
 eval $(ndsctl autocomplete:script bash)

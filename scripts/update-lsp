@@ -89,7 +89,13 @@ npm install --location=global vscode-langservers-extracted
 npm_install yarn
 
 pprint yaml
-pip install --user yamllint
+
+npm install --location=global dockerfilelint
+if [ "$os" = "Darwin" ]; then
+   brew install yamllint
+else
+   yaourt -S yamllint
+fi
 yarn global add yaml-language-server --prefix /usr/local
 
 pprint elm
@@ -106,13 +112,15 @@ else
    yaourt -S hadolint
 fi
 
-pprint yaml
+pprint markdown
 npm install --location=global markdownlint
 npm install --location=global markdownlint-cli
 cp "$basedir/tools/nvim/markdownlintrc" ~/.markdownlintrc
 
-pprint cfn-lint
-pip install --user cfn-lint
+if [ "$os" = "Darwin" ]; then
+   pprint cfn-lint
+   brew install cfn-lint
+fi
 
 pprint kubeval
 if [ "$os" = "Darwin" ]; then
