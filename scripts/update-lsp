@@ -17,7 +17,7 @@ pprint() {
 
 npm_install() {
    pprint "$1"
-   npm install -g "$1"
+   npm install --location=global "$1"
 }
 
 pprint efm-langserver
@@ -38,7 +38,7 @@ else
 fi
 
 pprint "shell script"
-npm install -g bash-language-server
+npm install --location=global bash-language-server
 if [ "$os" = "Darwin" ]; then
    brew install shfmt shellcheck
 else
@@ -66,7 +66,7 @@ if [ "$os" = "Darwin" ]; then
 
    cp "$basedir/tools/java/jdtls" /usr/local/bin/jdtls
 fi
-npm install -g prettier-plugin-java
+npm install --location=global prettier-plugin-java
 
 pprint rust
 if [ "$os" = "Darwin" ]; then
@@ -78,13 +78,13 @@ fi
 npm_install prettier
 
 pprint "node & typescript"
-npm install -g standard
-npm install -g typescript
-npm install -g typescript-language-server
-npm install -g ts-standard
+npm install --location=global standard
+npm install --location=global typescript
+npm install --location=global typescript-language-server
+npm install --location=global ts-standard
 
 pprint "json, html & css"
-npm install -g vscode-langservers-extracted
+npm install --location=global vscode-langservers-extracted
 
 npm_install yarn
 
@@ -93,13 +93,13 @@ pip install --user yamllint
 yarn global add yaml-language-server --prefix /usr/local
 
 pprint elm
-npm install -g elm
-npm install -g elm-test
-npm install -g elm-format
-npm install -g @elm-tooling/elm-language-server
+npm install --location=global elm
+npm install --location=global elm-test
+npm install --location=global elm-format
+npm install --location=global @elm-tooling/elm-language-server
 
 pprint docker
-npm install -g dockerfilelint
+npm install --location=global dockerfilelint
 if [ "$os" = "Darwin" ]; then
    brew install hadolint
 else
@@ -107,8 +107,8 @@ else
 fi
 
 pprint yaml
-npm install -g markdownlint
-npm install -g markdownlint-cli
+npm install --location=global markdownlint
+npm install --location=global markdownlint-cli
 cp "$basedir/tools/nvim/markdownlintrc" ~/.markdownlintrc
 
 pprint cfn-lint
