@@ -61,6 +61,9 @@ Plug 'google/vim-jsonnet'
 " color highligher
 Plug 'norcalli/nvim-colorizer.lua'
 
+" svelte
+Plug 'leafOfTree/vim-svelte-plugin'
+
 call plug#end()
 
 " disable providers
@@ -121,3 +124,6 @@ lua require('plugins')
 " Nerdtree
 map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" svelte
+let g:vim_svelte_plugin_use_typescript = 1
