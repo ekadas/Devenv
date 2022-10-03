@@ -7,7 +7,7 @@ for type, icon in pairs(signs) do
 end
 
 local on_attach = function(client)
-   if client.resolved_capabilities.document_formatting then
+   if client.server_capabilities.document_formatting then
       vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 3000)]]
    end
 
@@ -90,7 +90,7 @@ lspconfig.yamlls.setup {
 lspconfig.jsonls.setup {
    capabilities = capabilities,
    on_attach = function(client)
-      client.resolved_capabilities.document_formatting = false
+      client.server_capabilities.document_formatting = false
       on_attach(client)
    end,
    settings = {
@@ -112,7 +112,7 @@ lspconfig.jsonls.setup {
 lspconfig.tsserver.setup {
    capabilities = capabilities,
    on_attach = function(client)
-      client.resolved_capabilities.document_formatting = false
+      client.server_capabilities.document_formatting = false
       on_attach(client)
    end
 }
@@ -157,7 +157,7 @@ lspconfig.sumneko_lua.setup {
 lspconfig.jdtls.setup {
    capabilities = capabilities,
    on_attach = function(client)
-      client.resolved_capabilities.document_formatting = false
+      client.server_capabilities.document_formatting = false
       on_attach(client)
    end,
    cmd = {"jdtls"}

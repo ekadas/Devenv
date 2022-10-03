@@ -102,7 +102,7 @@ colorscheme srcery
 set ttimeoutlen=50
 
 " enable spell checking
-autocmd BufRead,BufNewFile *.md setlocal spell spelllang=en_uk
+autocmd BufRead,BufNewFile *.md setlocal spell spelllang=en_gb
 
 " lightline
 set showtabline=2
