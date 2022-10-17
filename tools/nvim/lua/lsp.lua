@@ -48,8 +48,7 @@ local on_attach = function(client, bufnr)
    keymap('n', 'ca', vim.lsp.buf.code_action, opts)
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- set up servers with default config
 local servers = { 'bashls', 'rust_analyzer', 'cssls', 'html' }
