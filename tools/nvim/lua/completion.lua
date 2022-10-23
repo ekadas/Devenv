@@ -8,7 +8,7 @@ end
 local luasnip = require("luasnip")
 local cmp = require 'cmp'
 
-cmp.setup {
+cmp.setup({
    mapping = cmp.mapping.preset.insert({
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<CR>'] = cmp.mapping.confirm {
@@ -46,7 +46,7 @@ cmp.setup {
       { name = 'luasnip' },
       { name = 'buffer' }
    },
-}
+})
 
 cmp.setup.cmdline('/', {
    mapping = cmp.mapping.preset.cmdline(),

@@ -109,11 +109,8 @@ opt.ttimeoutlen = 50
 -- enable spell checking
 autocmd({ 'BufRead', 'BufNewFile' }, { pattern = '*.md', command = 'setlocal spell spelllang=en_gb' })
 
--- lsp
-require('lsp')
-
--- treesitter
-require('treesitter')
+-- languages - configures treesitter, lsp and formatters and linters
+require('languages')
 
 -- colorize
 require('colorizer').setup()
@@ -157,6 +154,13 @@ require('lualine').setup({
       }}
    }
 })
+
+-- diagnostic signs
+local signs = { Error = '🩸', Warn = '⚡', Hint = '💡', Info = '❕' }
+for type, icon in pairs(signs) do
+   local hl = "DiagnosticSign" .. type
+   fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
 
 -- Nerdtree
 keymap('n', '<C-n>', ':NERDTreeToggle<CR>', { noremap = true })
