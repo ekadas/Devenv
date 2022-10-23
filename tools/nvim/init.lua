@@ -124,7 +124,10 @@ require('Comment').setup()
 -- completion
 require('completion')
 
--- lines
+-- do not show current mode since it is already shown by lualine
+opt.showmode = false
+
+-- statusline
 require('lualine').setup({
    options = {
       icons_enabled = false,
