@@ -24,8 +24,8 @@ require('lualine').setup({
       lualine_a = {'mode'},
       lualine_b = {'FugitiveHead'},
       lualine_c = {{'filename', path = 1}},
-      lualine_x = {'filetype'},
-      lualine_y = {'progress'},
+      lualine_x = {'diagnostics'},
+      lualine_y = {'filetype'},
       lualine_z = {'location'}
    },
    tabline = {
