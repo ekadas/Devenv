@@ -106,9 +106,6 @@ cmd[[colorscheme srcery]]
 -- more responsive timeout
 opt.ttimeoutlen = 50
 
--- no separate command line
-opt.cmdheight = 0
-
 -- enable spell checking
 autocmd({ 'BufRead', 'BufNewFile' }, { pattern = '*.md', command = 'setlocal spell spelllang=en_gb' })
 
