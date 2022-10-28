@@ -2,16 +2,6 @@ local lspconfig = require('lspconfig')
 local keymap = vim.keymap.set
 local autocmd = vim.api.nvim_create_autocmd
 
-local function lsp_formatting(bufnr)
-   vim.lsp.buf.format({
-      filter = function(client)
-         -- Prefer efm
-         return client.name ~= 'tsserver' and client.name ~= 'jsonls' and client.name ~= 'yamlls' and client.name ~= 'jdtls'
-      end,
-      bufnr = bufnr,
-      timeout_ms = 3000
-   })
-end
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local function on_attach(client, bufnr)
    if client.supports_method("textDocument/formatting") then
@@ -20,12 +10,7 @@ local function on_attach(client, bufnr)
          group = augroup,
          buffer = bufnr,
          callback = function()
-            vim.lsp.buf.format({
-               filter = function()
-                  lsp_formatting(bufnr)
-               end,
-               bufnr = bufnr,
-            })
+            vim.lsp.buf.format({ bufnr = bufnr, async = false, timeout_ms = 3000 })
          end
       })
    end
@@ -49,18 +34,16 @@ local function prettier(parameters)
    }
 end
 
-local default_lsp_config = {
-   capabilities = capabilities,
-   on_attach = on_attach,
-}
-
 -- treesitter is installed for each key and lsp and efm are set up according to configuration
 local languages = {
    comment = {},
    css = {
       lsp = {
          name = 'cssls',
-         config = default_lsp_config
+         config = {
+            capabilities = capabilities,
+            on_attach = on_attach,
+         }
       }
    },
    dockerfile = {
@@ -78,12 +61,12 @@ local languages = {
          name = 'elmls',
          config = {
             capabilities = capabilities,
-            on_attach = function(client)
+            on_attach = function(client, bufnr)
                if client.config.flags then
                   client.config.flags.allow_incremental_sync = true
                end
 
-               on_attach(client)
+               on_attach(client, bufnr)
             end,
             settings = {
                elmLS = {
@@ -96,7 +79,10 @@ local languages = {
    html = {
       lsp = {
          name = 'html',
-         config = default_lsp_config
+         config = {
+            capabilities = capabilities,
+            on_attach = on_attach,
+         }
       },
       efm = {
          prettier()
@@ -107,7 +93,11 @@ local languages = {
          name = 'jdtls',
          config = {
             capabilities = capabilities,
-            on_attach = on_attach,
+            on_attach = function(client, bufnr)
+               client.server_capabilities.documentFormattingProvider = false
+               client.server_capabilities.documentRangeFormattingProvider = false
+               on_attach(client, bufnr)
+            end,
             cmd = {'jdtls'}
          }
       },
@@ -129,7 +119,11 @@ local languages = {
          name = 'jsonls',
          config = {
             capabilities = capabilities,
-            on_attach = on_attach,
+            on_attach = function(client, bufnr)
+               client.server_capabilities.documentFormattingProvider = false
+               client.server_capabilities.documentRangeFormattingProvider = false
+               on_attach(client, bufnr)
+            end,
             settings = {
                json = {
                   schemaDownload = {
@@ -188,14 +182,20 @@ local languages = {
    rust = {
       lsp = {
          name = 'rust_analyzer',
-         config = default_lsp_config
+         config = {
+            capabilities = capabilities,
+            on_attach = on_attach,
+         }
       }
    },
    sh = {
       treesitter_name = 'bash',
       lsp = {
          name = 'bashls',
-         config = default_lsp_config
+         config = {
+            capabilities = capabilities,
+            on_attach = on_attach,
+         }
       },
       efm = {
          {
@@ -210,7 +210,14 @@ local languages = {
    typescript = {
       lsp = {
          name = 'tsserver',
-         config = default_lsp_config
+         config = {
+            capabilities = capabilities,
+            on_attach = function(client, bufnr)
+               client.server_capabilities.documentFormattingProvider = false
+               client.server_capabilities.documentRangeFormattingProvider = false
+               on_attach(client, bufnr)
+            end
+         }
       }
    },
    yaml = {
@@ -218,7 +225,11 @@ local languages = {
          name = 'yamlls',
          config = {
             capabilities = capabilities,
-            on_attach = on_attach,
+            on_attach = function(client, bufnr)
+               client.server_capabilities.documentFormattingProvider = false
+               client.server_capabilities.documentRangeFormattingProvider = false
+               on_attach(client, bufnr)
+            end,
             settings = {
                yaml = {
                   schemas = {
