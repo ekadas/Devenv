@@ -25,3 +25,4 @@ eval $(ndsctl autocomplete:script bash)
 [ -f /Users/endrek/Code/ndp.deployment-container/ndp-deployment-container.sh ] && source /Users/endrek/Code/ndp.deployment-container/ndp-deployment-container.sh
 
 alias assume="source assume"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
