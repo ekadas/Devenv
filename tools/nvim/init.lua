@@ -1,9 +1,4 @@
-local g = vim.g
-local opt = vim.opt
 local keymap = vim.keymap.set
-local cmd = vim.cmd
-local fn = vim.fn
-local autocmd = vim.api.nvim_create_autocmd
 
 local Plug = vim.fn['plug#']
 
@@ -16,7 +11,7 @@ Plug('jiangmiao/auto-pairs')
 Plug('nvim-lualine/lualine.nvim')
 
 -- fuzzy finder
-Plug('junegunn/fzf', { dir = '~/.fzf', ['do'] = fn['fzf#install'] })
+Plug('junegunn/fzf', { dir = '~/.fzf', ['do'] = vim.fn['fzf#install'] })
 
 -- git
 Plug('tpope/vim-fugitive')
@@ -75,15 +70,15 @@ Plug('leafOfTree/vim-svelte-plugin')
 vim.call('plug#end')
 
 -- disable providers
-g.loaded_python_provider = 0
-g.loaded_node_provider = 0
+vim.g.loaded_python_provider = 0
+vim.g.loaded_node_provider = 0
 
 -- line numbers
-opt.number = true
-opt.relativenumber = true
+vim.opt.number = true
+vim.opt.relativenumber = true
 
 -- shows preview for substitute
-opt.inccommand = 'split'
+vim.opt.inccommand = 'split'
 
 -- remap copy paste
 keymap('n', '<leader>y', '"+y', { noremap = true })
@@ -96,18 +91,22 @@ keymap('n', '<C-w>', ':bd<CR>', { noremap = true })
 
 -- fzf configs
 keymap('n', '<C-p>', ':FZF<CR>', { noremap = true })
-g.fzf_layout = { down = '~20%' }
+vim.g.fzf_layout = { down = '~20%' }
 
 -- colors
-g.t_co = 256
-opt.termguicolors = true
-cmd[[colorscheme srcery]]
+vim.g.t_co = 256
+vim.opt.termguicolors = true
+vim.cmd[[colorscheme srcery]]
 
 -- more responsive timeout
-opt.ttimeoutlen = 50
+vim.opt.ttimeoutlen = 50
 
+-- filetype specifics
+local filetypeGroup = vim.api.nvim_create_augroup("FiletypeSpecifics", { clear = true })
 -- enable spell checking
-autocmd({ 'BufRead', 'BufNewFile' }, { pattern = '*.md', command = 'setlocal spell spelllang=en_gb' })
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { pattern = '*.md', command = 'setlocal spell spelllang=en_gb', group = filetypeGroup })
+-- associate justfiles
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { pattern = 'justfile', command = 'setf make', group = filetypeGroup })
 
 -- languages - configures treesitter, lsp and formatters and linters
 require('languages')
@@ -122,7 +121,7 @@ require('Comment').setup()
 require('completion')
 
 -- do not show current mode since it is already shown by lualine
-opt.showmode = false
+vim.opt.showmode = false
 
 -- statusline
 require('lualine').setup({
@@ -159,12 +158,12 @@ require('lualine').setup({
 local signs = { Error = '🩸', Warn = '⚡', Hint = '💡', Info = '❕' }
 for type, icon in pairs(signs) do
    local hl = "DiagnosticSign" .. type
-   fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
 -- Nerdtree
 keymap('n', '<C-n>', ':NERDTreeToggle<CR>', { noremap = true })
-autocmd('BufEnter', { pattern = '*', command = "if (winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree()) | q | endif"})
+vim.api.nvim_create_autocmd('BufEnter', { pattern = '*', command = "if (winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree()) | q | endif"})
 
 -- svelte
-g.vim_svelte_plugin_use_typescript = 1
+vim.g.vim_svelte_plugin_use_typescript = 1

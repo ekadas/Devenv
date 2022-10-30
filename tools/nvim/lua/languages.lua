@@ -1,12 +1,11 @@
 local lspconfig = require('lspconfig')
 local keymap = vim.keymap.set
-local autocmd = vim.api.nvim_create_autocmd
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local function on_attach(client, bufnr)
    if client.supports_method("textDocument/formatting") then
       vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-      autocmd("BufWritePre", {
+      vim.api.nvim_create_autocmd("BufWritePre", {
          group = augroup,
          buffer = bufnr,
          callback = function()
