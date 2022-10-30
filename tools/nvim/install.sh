@@ -3,7 +3,7 @@
 if [ "$OS" = "Darwin" ]; then
    brew install neovim
 else
-   yaourt -S neovim-nightly-bin
+   sudo pacman -S neovim
 fi
 
 # install vim-plug

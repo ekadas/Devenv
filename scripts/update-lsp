@@ -24,14 +24,14 @@ pprint efm-langserver
 if [ "$os" = "Darwin" ]; then
    brew install efm-langserver
 else
-   sudo pacman -S efm-langserver
+   GOBIN=~/.local/bin go install github.com/mattn/efm-langserver@latest
 fi
 
 pprint lua-language-server
 if [ "$os" = "Darwin" ]; then
    brew install saadparwaiz1/personal/lua-language-server
 else
-   yaourt -S lua-language-server
+   sudo pacman -S lua-language-server
    if [ -f "/bin/lua-language-server" ]; then
       sudo mv /bin/lua-language-server /bin/lua-langserver
    fi
@@ -94,7 +94,7 @@ npm install --location=global dockerfilelint
 if [ "$os" = "Darwin" ]; then
    brew install yamllint
 else
-   yaourt -S yamllint
+   sudo pacman -S yamllint
 fi
 yarn global add yaml-language-server --prefix /usr/local
 
@@ -109,7 +109,7 @@ npm install --location=global dockerfilelint
 if [ "$os" = "Darwin" ]; then
    brew install hadolint
 else
-   yaourt -S hadolint
+   sudo pacman -S hadolint
 fi
 
 pprint markdown
@@ -125,6 +125,4 @@ fi
 pprint kubeval
 if [ "$os" = "Darwin" ]; then
    brew install kubeval
-else
-   yaourt -S kubeval
 fi

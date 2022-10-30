@@ -24,6 +24,4 @@ eval $(ndsctl autocomplete:script bash)
 
 [ -f /Users/endrek/Code/ndp.deployment-container/ndp-deployment-container.sh ] && source /Users/endrek/Code/ndp.deployment-container/ndp-deployment-container.sh
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
 alias assume="source assume"
