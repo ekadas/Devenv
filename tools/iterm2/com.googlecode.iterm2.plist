@@ -9,7 +9,7 @@
 	<key>AllowClipboardAccess</key>
 	<true/>
 	<key>Command</key>
-	<string>/opt/homebrew/Cellar/bash/5.2/bin/bash</string>
+	<string></string>
 	<key>Custom Color Presets</key>
 	<dict>
 		<key>color</key>
@@ -516,7 +516,7 @@
 			<key>Columns</key>
 			<integer>80</integer>
 			<key>Command</key>
-			<string>/opt/homebrew/Cellar/bash/5.2.2/bin/bash</string>
+			<string>/opt/homebrew/Cellar/bash/5.2.12/bin/bash</string>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -1963,7 +1963,7 @@
 	<key>Print In Black And White</key>
 	<true/>
 	<key>ShowFullScreenTabBar</key>
-	<true/>
+	<false/>
 	<key>Snippets</key>
 	<array>
 		<dict>
