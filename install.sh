@@ -9,21 +9,7 @@ BASEDIR="$(
    pwd -P
 )"
 OS=$(uname -s)
-export BASEDIR
-export OS
-
-pconfiguring() {
-   print_green "\n→ Configuring $1"
-}
-
-confirm() {
-   read -r -p "Configure $1? [y/N] " response
-   if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
-      pconfiguring "$1"
-      source "$2"
-      print_green "→ Done\n"
-   fi
-}
+export BASEDIR OS
 
 for dir in tools/*/; do
    path=${dir%*/}
