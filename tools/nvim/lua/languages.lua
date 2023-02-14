@@ -145,11 +145,10 @@ local languages = {
    },
    lua = {
       lsp = {
-         name = 'sumneko_lua',
+         name = 'lua_ls',
          config = {
             capabilities = capabilities,
             on_attach = on_attach,
-            cmd = {'lua-langserver'},
             settings = {
                Lua = {
                   runtime = {
@@ -160,6 +159,9 @@ local languages = {
                   },
                   workspace = {
                      library = vim.api.nvim_get_runtime_file('', true),
+                  },
+                  telemetry = {
+                     enable = false,
                   },
                },
             },

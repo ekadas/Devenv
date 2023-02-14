@@ -29,12 +29,9 @@ fi
 
 pprint lua-language-server
 if [ "$os" = "Darwin" ]; then
-   brew install saadparwaiz1/personal/lua-language-server
+   brew install lua-language-server
 else
    sudo pacman -S lua-language-server
-   if [ -f "/bin/lua-language-server" ]; then
-      sudo mv /bin/lua-language-server /bin/lua-langserver
-   fi
 fi
 
 pprint "shell script"
