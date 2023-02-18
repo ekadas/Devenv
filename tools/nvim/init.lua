@@ -11,7 +11,7 @@ Plug('jiangmiao/auto-pairs')
 Plug('nvim-lualine/lualine.nvim')
 
 -- fuzzy finder
-Plug('junegunn/fzf', { dir = '~/.fzf', ['do'] = vim.fn['fzf#install'] })
+Plug('junegunn/fzf', { dir = '~/.fzf',['do'] = vim.fn['fzf#install'] })
 
 -- git
 Plug('tpope/vim-fugitive')
@@ -31,7 +31,7 @@ Plug('hrsh7th/cmp-cmdline')
 Plug('hrsh7th/nvim-cmp')
 
 -- treesitter
-Plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
+Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
 
 -- quick commenting
 Plug('numToStr/Comment.nvim')
@@ -70,8 +70,10 @@ Plug('leafOfTree/vim-svelte-plugin')
 vim.call('plug#end')
 
 -- disable providers
-vim.g.loaded_python_provider = 0
+vim.g.loaded_python3_provider = 0
 vim.g.loaded_node_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
 
 -- line numbers
 vim.opt.number = true
@@ -96,7 +98,7 @@ vim.g.fzf_layout = { down = '~20%' }
 -- colors
 vim.g.t_co = 256
 vim.opt.termguicolors = true
-vim.cmd[[colorscheme srcery]]
+vim.cmd [[colorscheme srcery]]
 
 -- more responsive timeout
 vim.opt.ttimeoutlen = 50
@@ -104,9 +106,11 @@ vim.opt.ttimeoutlen = 50
 -- filetype specifics
 local filetypeGroup = vim.api.nvim_create_augroup("FiletypeSpecifics", { clear = true })
 -- enable spell checking
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { pattern = '*.md', command = 'setlocal spell spelllang=en_gb', group = filetypeGroup })
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' },
+   { pattern = '*.md', command = 'setlocal spell spelllang=en_gb', group = filetypeGroup })
 -- associate justfiles
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { pattern = 'justfile', command = 'setf make', group = filetypeGroup })
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' },
+   { pattern = 'justfile', command = 'setf make', group = filetypeGroup })
 
 -- languages - configures treesitter, lsp and formatters and linters
 require('languages')
@@ -131,15 +135,15 @@ require('lualine').setup({
       section_separators = ''
    },
    sections = {
-      lualine_a = {'mode'},
-      lualine_b = {'FugitiveHead'},
-      lualine_c = {{'filename', path = 1}},
-      lualine_x = {'diagnostics'},
-      lualine_y = {'filetype'},
-      lualine_z = {'location'}
+      lualine_a = { 'mode' },
+      lualine_b = { 'FugitiveHead' },
+      lualine_c = { { 'filename', path = 1 } },
+      lualine_x = { 'diagnostics' },
+      lualine_y = { 'filetype' },
+      lualine_z = { 'location' }
    },
    tabline = {
-      lualine_a = {{
+      lualine_a = { {
          'buffers',
          show_filename_only = false,
          buffers_color = {
@@ -150,7 +154,7 @@ require('lualine').setup({
             modified = ' ●',
             alternate_file = ''
          }
-      }}
+      } }
    }
 })
 
@@ -163,7 +167,8 @@ end
 
 -- Nerdtree
 keymap('n', '<C-n>', ':NERDTreeToggle<CR>', { noremap = true })
-vim.api.nvim_create_autocmd('BufEnter', { pattern = '*', command = "if (winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree()) | q | endif"})
+vim.api.nvim_create_autocmd('BufEnter',
+   { pattern = '*', command = "if (winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree()) | q | endif" })
 
 -- svelte
 vim.g.vim_svelte_plugin_use_typescript = 1
