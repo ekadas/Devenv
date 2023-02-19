@@ -1,4 +1,4 @@
-local lspconfig = require('lspconfig')
+require("mason").setup()
 local keymap = vim.keymap.set
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
@@ -97,7 +97,7 @@ local languages = {
                client.server_capabilities.documentRangeFormattingProvider = false
                on_attach(client, bufnr)
             end,
-            cmd = {'jdtls'}
+            cmd = { 'jdtls' }
          }
       },
       efm = {
@@ -155,7 +155,7 @@ local languages = {
                      version = 'LuaJIT'
                   },
                   diagnostics = {
-                     globals = {'vim'},
+                     globals = { 'vim' },
                   },
                   workspace = {
                      library = vim.api.nvim_get_runtime_file('', true),
@@ -281,14 +281,14 @@ local languages = {
 
 -- configure treesitter
 local ensure_installed = {}
-for language,config in pairs(languages) do
+for language, config in pairs(languages) do
    if config['treesitter_name'] ~= nil then
       table.insert(ensure_installed, config['treesitter_name'])
    else
       table.insert(ensure_installed, language)
    end
 end
-require'nvim-treesitter.configs'.setup({
+require 'nvim-treesitter.configs'.setup({
    ensure_installed = ensure_installed,
    ignore_install = { 'haskell' },
    highlight = {
@@ -299,8 +299,15 @@ require'nvim-treesitter.configs'.setup({
    }
 })
 
+-- configure mason - lsp package manager
+require('mason-lspconfig').setup({
+   ensure_installed = { 'lua_ls' },
+   automatic_installation = { exclude = { 'jdtls' } }
+})
+
 -- configure language specific lsps
-for _,config in pairs(languages) do
+local lspconfig = require('lspconfig')
+for _, config in pairs(languages) do
    if config['lsp'] ~= nil then
       local lsp_config = config['lsp']
       lspconfig[lsp_config['name']].setup(lsp_config['config'])
@@ -310,7 +317,7 @@ end
 -- configure efm a generic purpose lsp
 local efm_filetypes = {}
 local efm_config = {}
-for language,config in pairs(languages) do
+for language, config in pairs(languages) do
    if config['efm'] ~= nil then
       table.insert(efm_filetypes, language)
       efm_config[language] = config['efm']
@@ -324,7 +331,7 @@ lspconfig.efm.setup({
       documentFormatting = true
    },
    settings = {
-      rootMarkers = {".git/"},
+      rootMarkers = { ".git/" },
       languages = efm_config
    }
 })

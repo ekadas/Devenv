@@ -21,6 +21,8 @@ Plug('L3MON4D3/LuaSnip')
 Plug('saadparwaiz1/cmp_luasnip')
 
 -- lsp
+Plug('williamboman/mason.nvim')
+Plug('williamboman/mason-lspconfig.nvim')
 Plug('neovim/nvim-lspconfig')
 
 -- completion

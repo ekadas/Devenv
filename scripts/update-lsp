@@ -23,20 +23,16 @@ npm_install() {
 pprint efm-langserver
 if [ "$os" = "Darwin" ]; then
    brew install efm-langserver
-else
-   GOBIN=~/.local/bin go install github.com/mattn/efm-langserver@latest
 fi
 
 pprint lua-language-server
 if [ "$os" = "Darwin" ]; then
    brew install lua-language-server
-else
-   sudo pacman -S lua-language-server
 fi
 
 pprint "shell script"
-npm install --location=global bash-language-server
 if [ "$os" = "Darwin" ]; then
+   npm install --location=global bash-language-server
    brew install shfmt shellcheck
 else
    sudo pacman -S shfmt shellcheck
@@ -62,14 +58,12 @@ if [ "$os" = "Darwin" ]; then
    fi
 
    cp "$basedir/tools/java/jdtls" /usr/local/bin/jdtls
+   npm install --location=global prettier-plugin-java
 fi
-npm install --location=global prettier-plugin-java
 
 pprint rust
 if [ "$os" = "Darwin" ]; then
    brew install rust-analyzer
-else
-   sudo pacman -S rust-analyzer
 fi
 
 npm_install prettier
@@ -77,29 +71,32 @@ npm_install prettier
 pprint "node & typescript"
 npm install --location=global standard
 npm install --location=global typescript
-npm install --location=global typescript-language-server
+if [ "$os" = "Darwin" ]; then
+   npm install --location=global typescript-language-server
+fi
 npm install --location=global ts-standard
 
 pprint "json, html & css"
-npm install --location=global vscode-langservers-extracted
-
-npm_install yarn
+if [ "$os" = "Darwin" ]; then
+   npm install --location=global vscode-langservers-extracted
+fi
 
 pprint yaml
-
-npm install --location=global dockerfilelint
 if [ "$os" = "Darwin" ]; then
+   npm_install yarn
+   yarn global add yaml-language-server --prefix /usr/local
    brew install yamllint
 else
    sudo pacman -S yamllint
 fi
-yarn global add yaml-language-server --prefix /usr/local
 
 pprint elm
 npm install --location=global elm
 npm install --location=global elm-test
 npm install --location=global elm-format
-npm install --location=global @elm-tooling/elm-language-server
+if [ "$os" = "Darwin" ]; then
+   npm install --location=global @elm-tooling/elm-language-server
+fi
 
 pprint docker
 npm install --location=global dockerfilelint
