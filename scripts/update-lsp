@@ -20,50 +20,21 @@ npm_install() {
    npm install --location=global "$1"
 }
 
-pprint efm-langserver
 if [ "$os" = "Darwin" ]; then
+   pprint efm-langserver
    brew install efm-langserver
-fi
-
-pprint lua-language-server
-if [ "$os" = "Darwin" ]; then
-   brew install lua-language-server
 fi
 
 pprint "shell script"
 if [ "$os" = "Darwin" ]; then
-   npm install --location=global bash-language-server
    brew install shfmt shellcheck
 else
    sudo pacman -S shfmt shellcheck
 fi
 
-pprint java
 if [ "$os" = "Darwin" ]; then
-   jdtls_path=/usr/local/share/eclipse.jdt.ls
-
-   if [ -d "$jdtls_path" ]; then
-      (
-         cd $jdtls_path || return
-         git pp
-
-         ./mvnw package -DSkipTests
-      )
-   else
-      git clone git@github.com:eclipse/eclipse.jdt.ls.git $jdtls_path
-      (
-         cd $jdtls_path || return
-         ./mvnw clean verify
-      )
-   fi
-
-   cp "$basedir/tools/java/jdtls" /usr/local/bin/jdtls
+   pprint java
    npm install --location=global prettier-plugin-java
-fi
-
-pprint rust
-if [ "$os" = "Darwin" ]; then
-   brew install rust-analyzer
 fi
 
 npm_install prettier
@@ -71,20 +42,10 @@ npm_install prettier
 pprint "node & typescript"
 npm install --location=global standard
 npm install --location=global typescript
-if [ "$os" = "Darwin" ]; then
-   npm install --location=global typescript-language-server
-fi
 npm install --location=global ts-standard
-
-pprint "json, html & css"
-if [ "$os" = "Darwin" ]; then
-   npm install --location=global vscode-langservers-extracted
-fi
 
 pprint yaml
 if [ "$os" = "Darwin" ]; then
-   npm_install yarn
-   yarn global add yaml-language-server --prefix /usr/local
    brew install yamllint
 else
    sudo pacman -S yamllint
@@ -94,9 +55,6 @@ pprint elm
 npm install --location=global elm
 npm install --location=global elm-test
 npm install --location=global elm-format
-if [ "$os" = "Darwin" ]; then
-   npm install --location=global @elm-tooling/elm-language-server
-fi
 
 pprint docker
 npm install --location=global dockerfilelint
@@ -116,7 +74,7 @@ if [ "$os" = "Darwin" ]; then
    brew install cfn-lint
 fi
 
-pprint kubeval
 if [ "$os" = "Darwin" ]; then
+   pprint kubeval
    brew install kubeval
 fi

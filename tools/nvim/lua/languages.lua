@@ -301,8 +301,7 @@ require 'nvim-treesitter.configs'.setup({
 
 -- configure mason - lsp package manager
 require('mason-lspconfig').setup({
-   ensure_installed = { 'lua_ls' },
-   automatic_installation = { exclude = { 'jdtls' } }
+   automatic_installation = { exclude = { 'efm', 'jdtls' } }
 })
 
 -- configure language specific lsps
