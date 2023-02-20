@@ -20,11 +20,6 @@ npm_install() {
    npm install --location=global "$1"
 }
 
-if [ "$os" = "Darwin" ]; then
-   pprint efm-langserver
-   brew install efm-langserver
-fi
-
 pprint "shell script"
 if [ "$os" = "Darwin" ]; then
    brew install shfmt shellcheck

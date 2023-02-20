@@ -143,6 +143,15 @@ local languages = {
          prettier()
       }
    },
+   jsonnet = {
+      lsp = {
+         name = 'jsonnet_ls',
+         config = {
+            capabilities = capabilities,
+            on_attach = on_attach,
+         }
+      }
+   },
    lua = {
       lsp = {
          name = 'lua_ls',
@@ -301,7 +310,7 @@ require 'nvim-treesitter.configs'.setup({
 
 -- configure mason - lsp package manager
 require('mason-lspconfig').setup({
-   automatic_installation = { exclude = { 'efm', 'jdtls' } }
+   automatic_installation = { exclude = { 'jdtls' } }
 })
 
 -- configure language specific lsps
