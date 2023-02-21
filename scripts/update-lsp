@@ -15,60 +15,6 @@ pprint() {
    print_green "\n→ $1"
 }
 
-npm_install() {
-   pprint "$1"
-   npm install --location=global "$1"
-}
-
-pprint "shell script"
-if [ "$os" = "Darwin" ]; then
-   brew install shfmt shellcheck
-else
-   sudo pacman -S shfmt shellcheck
-fi
-
-if [ "$os" = "Darwin" ]; then
-   pprint java
-   npm install --location=global prettier-plugin-java
-fi
-
-npm_install prettier
-
-pprint "node & typescript"
-npm install --location=global standard
-npm install --location=global typescript
-npm install --location=global ts-standard
-
-pprint yaml
-if [ "$os" = "Darwin" ]; then
-   brew install yamllint
-else
-   sudo pacman -S yamllint
-fi
-
-pprint elm
-npm install --location=global elm
-npm install --location=global elm-test
-npm install --location=global elm-format
-
-pprint docker
-npm install --location=global dockerfilelint
-if [ "$os" = "Darwin" ]; then
-   brew install hadolint
-else
-   sudo pacman -S hadolint
-fi
-
-pprint markdown
-npm install --location=global markdownlint
-npm install --location=global markdownlint-cli
-cp "$basedir/tools/nvim/markdownlintrc" ~/.markdownlintrc
-
-if [ "$os" = "Darwin" ]; then
-   pprint cfn-lint
-   brew install cfn-lint
-fi
-
 if [ "$os" = "Darwin" ]; then
    pprint kubeval
    brew install kubeval

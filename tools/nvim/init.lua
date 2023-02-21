@@ -4,6 +4,9 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin', '~/.local/share/nvim/plugged')
 
+-- All the lua functions I don't want to write twice
+Plug('nvim-lua/plenary.nvim')
+
 -- auto closes brackets
 Plug('jiangmiao/auto-pairs')
 
@@ -24,6 +27,8 @@ Plug('saadparwaiz1/cmp_luasnip')
 Plug('williamboman/mason.nvim')
 Plug('williamboman/mason-lspconfig.nvim')
 Plug('neovim/nvim-lspconfig')
+Plug('jose-elias-alvarez/null-ls.nvim')
+Plug('jay-babu/mason-null-ls.nvim')
 
 -- completion
 Plug('hrsh7th/cmp-nvim-lsp')

@@ -25,15 +25,7 @@ end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local function prettier(parameters)
-   parameters = parameters or ''
-   return {
-      formatCommand = 'prettier --stdin-filepath ${INPUT} ' .. parameters,
-      formatStdin = true
-   }
-end
-
--- treesitter is installed for each key and lsp and efm are set up according to configuration
+-- treesitter is installed for each key and lsp and null-ls are set up according to configuration
 local languages = {
    comment = {},
    css = {
@@ -45,16 +37,7 @@ local languages = {
          }
       }
    },
-   dockerfile = {
-      efm = {
-         {
-            lintCommand = 'hadolint',
-            lintFormats = {
-               '%f:%l %m'
-            }
-         }
-      }
-   },
+   dockerfile = {},
    elm = {
       lsp = {
          name = 'elmls',
@@ -83,9 +66,6 @@ local languages = {
             on_attach = on_attach,
          }
       },
-      efm = {
-         prettier()
-      }
    },
    java = {
       lsp = {
@@ -100,19 +80,8 @@ local languages = {
             cmd = { 'jdtls' }
          }
       },
-      efm = {
-         prettier()
-      }
    },
-   javascript = {
-      -- uses tsserver lsp, configured under typescript
-      efm = {
-         {
-            formatCommand = 'standard --fix --stdin',
-            formatStdin = true
-         }
-      }
-   },
+   javascript = {},
    json = {
       lsp = {
          name = 'jsonls',
@@ -139,9 +108,6 @@ local languages = {
             }
          }
       },
-      efm = {
-         prettier()
-      }
    },
    jsonnet = {
       lsp = {
@@ -177,17 +143,7 @@ local languages = {
          }
       }
    },
-   markdown = {
-      efm = {
-         {
-            lintCommand = 'markdownlint -s -c ${HOME}/.markdownlintrc',
-            lintStdin = true,
-            lintFormats = {
-               '%f:%l %m'
-            }
-         }
-      }
-   },
+   markdown = {},
    python = {},
    rust = {
       lsp = {
@@ -205,14 +161,6 @@ local languages = {
          config = {
             capabilities = capabilities,
             on_attach = on_attach,
-         }
-      },
-      efm = {
-         {
-            formatCommand = 'shfmt -filename ${INPUT}',
-            formatStdin = true,
-            lintCommand = 'shellcheck -f gcc -x',
-            lintSource = 'shellcheck'
          }
       }
    },
@@ -274,16 +222,6 @@ local languages = {
                }
             }
          }
-      },
-      efm = {
-         prettier('--single-quote'),
-         {
-            lintCommand = 'yamllint -f parsable -',
-            lintStdin = true,
-            lintFormats = {
-               '%f:%l %m'
-            }
-         }
       }
    },
 }
@@ -322,24 +260,27 @@ for _, config in pairs(languages) do
    end
 end
 
--- configure efm a generic purpose lsp
-local efm_filetypes = {}
-local efm_config = {}
-for language, config in pairs(languages) do
-   if config['efm'] ~= nil then
-      table.insert(efm_filetypes, language)
-      efm_config[language] = config['efm']
-   end
-end
-lspconfig.efm.setup({
-   capabilities = capabilities,
+-- configure general purpose lsp
+local null_ls = require("null-ls")
+local sources = {
+   null_ls.builtins.code_actions.shellcheck,
+   null_ls.builtins.formatting.shfmt,
+   null_ls.builtins.diagnostics.hadolint,
+   null_ls.builtins.diagnostics.yamllint.with({ extra_args = { '-c', vim.fn.expand('~/.config/nvim/yamllint.yaml') } }),
+   null_ls.builtins.diagnostics.standardjs,
+   null_ls.builtins.formatting.standardjs.with({ extra_args = { '--fix' } }),
+   null_ls.builtins.diagnostics.markdownlint.with({ extra_args = { '--config', vim.fn.expand('~/.config/nvim/markdownlintrc') } }),
+   null_ls.builtins.diagnostics.cfn_lint,
+   null_ls.builtins.formatting.prettier.with({
+      filetypes = { "html", "json", "yaml" },
+   })
+}
+null_ls.setup({
    on_attach = on_attach,
-   filetypes = efm_filetypes,
-   init_options = {
-      documentFormatting = true
-   },
-   settings = {
-      rootMarkers = { ".git/" },
-      languages = efm_config
-   }
+   sources = sources
+})
+require("mason-null-ls").setup({
+   ensure_installed = nil,
+   automatic_installation = true,
+   automatic_setup = false,
 })
