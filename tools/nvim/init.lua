@@ -49,7 +49,7 @@ Plug('numToStr/Comment.nvim')
 Plug('tpope/vim-surround')
 
 -- Colorscheme
-Plug('srcery-colors/srcery-vim')
+Plug('rebelot/kanagawa.nvim')
 
 -- Nerdtree
 Plug('scrooloose/nerdtree', { on = 'NERDTreeToggle' })
@@ -107,7 +107,7 @@ vim.g.fzf_layout = { down = '~20%' }
 -- colors
 vim.g.t_co = 256
 vim.opt.termguicolors = true
-vim.cmd [[colorscheme srcery]]
+vim.cmd [[colorscheme kanagawa]]
 
 -- more responsive timeout
 vim.opt.ttimeoutlen = 50
@@ -141,7 +141,8 @@ require('lualine').setup({
    options = {
       icons_enabled = false,
       component_separators = '|',
-      section_separators = ''
+      section_separators = '',
+      theme = 'kanagawa'
    },
    sections = {
       lualine_a = { 'mode' },
@@ -155,10 +156,6 @@ require('lualine').setup({
       lualine_a = { {
          'buffers',
          show_filename_only = false,
-         buffers_color = {
-            active = { bg = 51, fg = 236 },
-            inactive = { bg = 236, fg = 51 }
-         },
          symbols = {
             modified = ' ●',
             alternate_file = ''
