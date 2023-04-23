@@ -105,8 +105,6 @@ keymap('n', '<C-p>', ':FZF<CR>', { noremap = true })
 vim.g.fzf_layout = { down = '~20%' }
 
 -- colors
-vim.g.t_co = 256
-vim.opt.termguicolors = true
 vim.cmd [[colorscheme kanagawa]]
 
 -- more responsive timeout

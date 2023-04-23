@@ -17,8 +17,6 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-alias tmux="TERM=screen-256color-bce tmux"
-
 export PATH="$PATH:~/Devenv/scripts:~/.cargo/bin:~/.local/bin"
 source "$HOME/.cargo/env"
 
