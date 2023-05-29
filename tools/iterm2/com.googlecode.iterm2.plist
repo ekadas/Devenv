@@ -9,7 +9,7 @@
 	<key>AllowClipboardAccess</key>
 	<true/>
 	<key>Command</key>
-	<string></string>
+	<string>/opt/homebrew/Cellar/bash/5.2.15/bin/bash</string>
 	<key>Custom Color Presets</key>
 	<dict>
 		<key>color</key>
@@ -2376,7 +2376,7 @@
 	<key>Print In Black And White</key>
 	<true/>
 	<key>ShowFullScreenTabBar</key>
-	<true/>
+	<false/>
 	<key>Snippets</key>
 	<array>
 		<dict>
