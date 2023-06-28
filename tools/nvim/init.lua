@@ -14,7 +14,7 @@ Plug('jiangmiao/auto-pairs')
 Plug('nvim-lualine/lualine.nvim')
 
 -- fuzzy finder
-Plug('junegunn/fzf', { dir = '~/.fzf',['do'] = vim.fn['fzf#install'] })
+Plug('junegunn/fzf', { dir = '~/.fzf', ['do'] = vim.fn['fzf#install'] })
 
 -- git
 Plug('tpope/vim-fugitive')
@@ -36,8 +36,6 @@ Plug('hrsh7th/cmp-buffer')
 Plug('hrsh7th/cmp-path')
 Plug('hrsh7th/cmp-cmdline')
 Plug('hrsh7th/nvim-cmp')
-Plug('zbirenbaum/copilot.lua')
-Plug('zbirenbaum/copilot-cmp')
 
 -- treesitter
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
