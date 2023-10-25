@@ -9,5 +9,10 @@ if [ "$OS" = "Darwin" ]; then
    brew tap common-fate/granted
    brew install granted
 else
-   echo "No installation instructions for linux"
+   sudo pacman -S aws-cli-v2
+
+   # install ssm plugin
+   git clone https://aur.archlinux.org/aws-session-manager-plugin.git
+   makepkg -is -p aws-session-manager-plugin/PKGBUILD
+   rm -rf aws-session-manager-plugin
 fi
