@@ -4,25 +4,21 @@ alias ls='ls -G'
 
 source ~/Devenv/tools/bash/bash_common
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(brew shellenv)"
 
 if [ -f $(brew --prefix)/etc/profile.d/bash_completion.sh ]; then
 	. $(brew --prefix)/etc/profile.d/bash_completion.sh
 fi
-
-eval "$(jenv init -)"
 
 source <(kubectl completion bash)
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 complete -C '/opt/homebrew/bin/aws_completer' aws
 
-. <(eksctl completion bash)
+if type "eksctl" > /dev/null 2>&1; then
+   source <(eksctl completion bash)
+fi
 
-# ndsctl autocomplete setup
-eval $(ndsctl autocomplete:script bash)
-
-[ -f /Users/endrek/Code/ndp.deployment-container/ndp-deployment-container.sh ] && source /Users/endrek/Code/ndp.deployment-container/ndp-deployment-container.sh
-
-alias assume="source assume"
-export PATH="/opt/homebrew/opt/libpq/bin:${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
