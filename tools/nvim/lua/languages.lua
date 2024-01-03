@@ -67,20 +67,6 @@ local languages = {
          }
       },
    },
-   java = {
-      lsp = {
-         name = 'jdtls',
-         config = {
-            capabilities = capabilities,
-            on_attach = function(client, bufnr)
-               client.server_capabilities.documentFormattingProvider = false
-               client.server_capabilities.documentRangeFormattingProvider = false
-               on_attach(client, bufnr)
-            end,
-            cmd = { 'jdtls' }
-         }
-      },
-   },
    javascript = {},
    json = {
       lsp = {
@@ -101,22 +87,14 @@ local languages = {
                      {
                         description = 'AWS IAM configuration',
                         fileMatch = { 'iam/*.json' },
-                        url = 'https://gist.githubusercontent.com/jstewmon/ee5d4b7ec0d8d60cbc303cb515272f8a/raw/fc6977788b85ea52e9acad0347287516157b5865/aws-iam-poilcy-schema.json'
+                        url =
+                        'https://gist.githubusercontent.com/jstewmon/ee5d4b7ec0d8d60cbc303cb515272f8a/raw/fc6977788b85ea52e9acad0347287516157b5865/aws-iam-poilcy-schema.json'
                      }
                   }
                }
             }
          }
       },
-   },
-   jsonnet = {
-      lsp = {
-         name = 'jsonnet_ls',
-         config = {
-            capabilities = capabilities,
-            on_attach = on_attach,
-         }
-      }
    },
    lua = {
       lsp = {
