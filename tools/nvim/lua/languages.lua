@@ -37,6 +37,15 @@ local languages = {
          }
       }
    },
+   dart = {
+      lsp = {
+         name = 'dartls',
+         config = {
+            capabilities = capabilities,
+            on_attach = on_attach,
+         }
+      }
+   },
    dockerfile = {},
    elm = {
       lsp = {
