@@ -160,7 +160,17 @@ local languages = {
          }
       }
    },
+   sql = {},
    toml = {},
+   terraform = {
+      lsp = {
+         name = 'terraformls',
+         config = {
+            capabilities = capabilities,
+            on_attach = on_attach,
+         }
+      }
+   },
    typescript = {
       lsp = {
          name = 'tsserver',
@@ -263,8 +273,6 @@ local sources = {
    null_ls.builtins.formatting.shfmt,
    null_ls.builtins.diagnostics.hadolint,
    null_ls.builtins.diagnostics.yamllint.with({ extra_args = { '-c', vim.fn.expand('~/.config/nvim/yamllint.yaml') } }),
-   null_ls.builtins.diagnostics.standardjs,
-   null_ls.builtins.formatting.standardjs.with({ extra_args = { '--fix' } }),
    null_ls.builtins.diagnostics.markdownlint.with({ extra_args = { '--config', vim.fn.expand('~/.config/nvim/markdownlintrc') } }),
    null_ls.builtins.diagnostics.cfn_lint,
    null_ls.builtins.formatting.prettier.with({
