@@ -141,15 +141,6 @@ local languages = {
          }
       }
    },
-   ruby = {
-      lsp = {
-         name = 'solargraph',
-         config = {
-            capabilities = capabilities,
-            on_attach = on_attach,
-         }
-      }
-   },
    sh = {
       treesitter_name = 'bash',
       lsp = {
