@@ -20,7 +20,10 @@ alias l='ls -CF'
 export PATH="$PATH:~/Devenv/scripts:~/.cargo/bin:~/.local/bin"
 source "$HOME/.cargo/env"
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export FZF_DEFAULT_COMMAND='fd --type f'
+if [ -f ~/.fzf.bash ]; then
+   source ~/.fzf.bash
+   eval "$(fzf --bash)"
+   export FZF_DEFAULT_COMMAND='fd --type f'
+fi
 
 [ -f ~/.k8s ] && . ~/.k8s
