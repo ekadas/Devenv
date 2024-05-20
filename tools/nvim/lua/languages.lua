@@ -131,6 +131,15 @@ local languages = {
       }
    },
    markdown = {},
+   prisma = {
+      lsp = {
+         name = 'prismals',
+         config = {
+            capabilities = capabilities,
+            on_attach = on_attach,
+         }
+      }
+   },
    python = {},
    rust = {
       lsp = {
