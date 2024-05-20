@@ -40,9 +40,6 @@ Plug('hrsh7th/nvim-cmp')
 -- treesitter
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
 
--- quick commenting
-Plug('numToStr/Comment.nvim')
-
 -- surround
 Plug('tpope/vim-surround')
 
@@ -122,9 +119,6 @@ require('languages')
 
 -- colorize
 require('colorizer').setup()
-
--- commenter
-require('Comment').setup()
 
 -- completion
 require('completion')
