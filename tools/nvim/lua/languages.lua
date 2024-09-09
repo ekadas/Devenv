@@ -173,7 +173,7 @@ local languages = {
    },
    typescript = {
       lsp = {
-         name = 'tsserver',
+         name = 'ts_ls',
          config = {
             capabilities = capabilities,
             on_attach = function(client, bufnr)
