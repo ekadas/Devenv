@@ -6,7 +6,6 @@ vim.call('plug#begin', '~/.local/share/nvim/plugged')
 
 -- All the lua functions I don't want to write twice
 Plug('nvim-lua/plenary.nvim')
-
 -- auto closes brackets
 Plug('jiangmiao/auto-pairs')
 
@@ -70,6 +69,9 @@ Plug('norcalli/nvim-colorizer.lua')
 
 -- svelte
 Plug('leafOfTree/vim-svelte-plugin')
+
+-- just
+Plug('IndianBoy42/tree-sitter-just')
 
 vim.call('plug#end')
 
