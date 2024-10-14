@@ -170,3 +170,8 @@ vim.api.nvim_create_autocmd('BufEnter',
 
 -- svelte
 vim.g.vim_svelte_plugin_use_typescript = 1
+
+-- deno
+vim.g.markdown_fenced_languages = {
+   "ts=typescript"
+}

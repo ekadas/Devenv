@@ -25,6 +25,8 @@ end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+local lspconfig = require('lspconfig')
+
 -- treesitter is installed for each key and lsp and null-ls are set up according to configuration
 local languages = {
    comment = {},
@@ -187,7 +189,16 @@ local languages = {
                client.server_capabilities.documentFormattingProvider = false
                client.server_capabilities.documentRangeFormattingProvider = false
                on_attach(client, bufnr)
-            end
+            end,
+            root_dir = function(filename)
+               local denoRootDir = lspconfig.util.root_pattern("deno.json", "deno.json")(filename);
+               if denoRootDir then
+                  return nil;
+               end
+
+               return lspconfig.util.root_pattern("package.json")(filename);
+            end,
+            single_file_support = false,
          }
       }
    },
@@ -265,13 +276,19 @@ require('mason-lspconfig').setup({
 })
 
 -- configure language specific lsps
-local lspconfig = require('lspconfig')
 for _, config in pairs(languages) do
    if config['lsp'] ~= nil then
       local lsp_config = config['lsp']
       lspconfig[lsp_config['name']].setup(lsp_config['config'])
    end
 end
+
+-- configure deno
+lspconfig.denols.setup({
+   capabilities = capabilities,
+   on_attach = on_attach,
+   root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+})
 
 -- configure general purpose lsp
 local null_ls = require("null-ls")
