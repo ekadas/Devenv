@@ -22,3 +22,6 @@ fi
 if [[ $(which mise) ]]; then
    eval "$(mise activate bash)"
 fi
+. "/Users/endrekadas/.deno/env"
+
+export CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_LINKER=x86_64-linux-musl-gcc
